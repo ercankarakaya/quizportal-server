@@ -8,7 +8,7 @@ spring:
     driver-class-name: org.postgresql.Driver
     url: jdbc:postgresql://localhost:5432/QUIZ_PORTAL_TEST
     username: postgres
-    password: postgresercn71
+    password:
 
   jpa:
     properties:
