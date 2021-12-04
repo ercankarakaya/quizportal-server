@@ -5,21 +5,18 @@ server:
 # Spring DATASOURCE (DataSourceAutoConfiguration & DataSourceProperties)
 spring:
   datasource:
-    driver-class-name: org.postgresql.Driver
-    url: jdbc:postgresql://localhost:5432/QUIZ_PORTAL_DEV
-    username: postgres
-    password:
+    driver-class-name: oracle.jdbc.OracleDriver
+    url: jdbc:oracle:thin:@//localhost:1521
+    username: hr
+    password: hr
 
+  #JPA Settings
   jpa:
     properties:
       hibernate.enable_lazy_load_no_trans: true
-    database: postgresql
-    database-platform: org.hibernate.dialect.PostgreSQL94Dialect
+    database: oracle
+    database-platform: org.hibernate.dialect.Oracle12cDialect
     hibernate:
       ddl-auto: update
     show-sql: true
 
-#Enable Color in Spring Boot Console Log
-  output:
-    ansi:
-      enabled: always
