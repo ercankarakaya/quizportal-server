@@ -20,3 +20,4 @@ Quiz Project Backend. Tools: Spring Boot, Rest API, JPA, Oracle Database.
 - Release v1.0.5 is published on 04.12.2021
 - Release v1.0.6 is published on 04.12.2021
 - Release v1.0.7 is published on 05.12.2021
+- Release v1.0.8 is published on 05.12.2021
