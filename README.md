@@ -3,7 +3,7 @@ Quiz Project Backend. Tools: Spring Boot, Rest API, JPA, Oracle Database.
 
 # Pre-requirements
 
-##Spring Boot v2.6.0
+## Spring Boot v2.6.0
 
 ## Database: Oracle 18c XE  
 
