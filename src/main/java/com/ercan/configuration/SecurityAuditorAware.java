@@ -24,12 +24,12 @@ public class SecurityAuditorAware implements AuditorAware<String> {
 //                .getAuthentication()
 //                .getName());
 
-        return Optional.of(Optional.ofNullable(SecurityContextHolder.getContext())
-                .map(SecurityContext::getAuthentication)
-                .filter(Authentication::isAuthenticated)
-                .map(Authentication::getPrincipal)
-                .map(User.class::cast).get().getUsername());
+//        return Optional.of(Optional.ofNullable(SecurityContextHolder.getContext())
+//                .map(SecurityContext::getAuthentication)
+//                .filter(Authentication::isAuthenticated)
+//                .map(Authentication::getPrincipal)
+//                .map(User.class::cast).get().getUsername());
+        return Optional.of("Ercan");
     }
-
 
 }

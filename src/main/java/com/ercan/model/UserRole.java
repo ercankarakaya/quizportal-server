@@ -1,6 +1,8 @@
 package com.ercan.model;
 
 import lombok.AccessLevel;
+import lombok.Data;
+import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
 
 import javax.persistence.Entity;
@@ -8,7 +10,9 @@ import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+@Data
 @Entity
+@RequiredArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class UserRole extends BaseModel {
 
