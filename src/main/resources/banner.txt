@@ -4,6 +4,6 @@ ${Ansi.GREEN}
                                    | (_) | | |_| |  | |   / /    |  _/ | (_) | |   /   | |    / _ \  | |__
                                     \__\_\  \___/  |___| /___|   |_|    \___/  |_|_\   |_|   /_/ \_\ |____|
 
-  ${application.title} ${application.version}
+  ${spring.application.name} ${application.version}
   Powered by Spring Boot ${spring-boot.formatted-version}
 ${Ansi.DEFAULT}
