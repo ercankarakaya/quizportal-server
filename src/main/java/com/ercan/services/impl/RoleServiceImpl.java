@@ -1,6 +1,6 @@
-package com.ercan.service.impl;
+package com.ercan.services.impl;
 
-import com.ercan.service.RoleService;
+import com.ercan.services.RoleService;
 import org.springframework.stereotype.Service;
 
 @Service

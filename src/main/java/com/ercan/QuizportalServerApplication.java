@@ -8,14 +8,10 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @Slf4j
 @SpringBootApplication
-public class QuizportalServerApplication implements CommandLineRunner {
+public class QuizportalServerApplication {
 
     public static void main(String[] args) {
         SpringApplication.run(QuizportalServerApplication.class, args);
     }
 
-    @Override
-    public void run(String... args) throws Exception {
-        log.info("Started Project...");
-    }
 }

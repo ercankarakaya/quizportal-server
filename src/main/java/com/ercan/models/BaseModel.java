@@ -1,8 +1,9 @@
-package com.ercan.model;
+package com.ercan.models;
 
 import com.ercan.constans.DatabaseConstant;
 import lombok.AccessLevel;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.experimental.FieldDefaults;
 import org.hibernate.annotations.Where;
 import org.springframework.data.annotation.*;
@@ -12,6 +13,7 @@ import javax.persistence.*;
 import javax.persistence.Id;
 import java.io.Serializable;
 import java.util.Calendar;
+import java.util.Objects;
 
 /**
  * @author Ercan Karakaya 04.12.2021
@@ -19,10 +21,9 @@ import java.util.Calendar;
 
 @Data
 @MappedSuperclass
-@Where(clause = "recordStatus='false'")
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @EntityListeners(AuditingEntityListener.class)
-public abstract class BaseModel implements Serializable {
+public class BaseModel implements Serializable {
 
     static final long serialVersionUID = 1L;
 
@@ -47,7 +48,7 @@ public abstract class BaseModel implements Serializable {
 
     @PrePersist
     public void onCreate(){
-        setRecordStatus(DatabaseConstant.RecordStatus.ACTIVE);
+        recordStatus= DatabaseConstant.RecordStatus.ACTIVE;
     }
 
 }

@@ -1,15 +1,15 @@
 # quizportal-server
 Quiz Project Backend. Tools: Spring Boot, Rest API, JPA, Oracle Database.
 
-# Pre-requirements
+# Pre-requirements:
 
-## Spring Boot v2.6.0
+### Java 1.8 or 11
+### Spring Boot v2.6.0
+### Database: Oracle 18c XE
+### Hibernate with JPA
+### Lombok Extension
 
-## Database: Oracle 18c XE  
-
-## Lombok Extension
-
-You should enable Lombok extension in your IDE.
+- You should enable Lombok extension in your IDE.
 
 # Getting Started
 

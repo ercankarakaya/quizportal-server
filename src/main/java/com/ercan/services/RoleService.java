@@ -1,4 +1,4 @@
-package com.ercan.service;
+package com.ercan.services;
 
 public interface RoleService {
 }
