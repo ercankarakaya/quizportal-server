@@ -9,12 +9,10 @@ import com.ercan.services.*;
 import lombok.*;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
-import org.modelmapper.internal.util.Lists;
 import org.springframework.beans.factory.annotation.*;
 import org.springframework.http.*;
 import org.springframework.web.bind.annotation.*;
 
-import java.lang.reflect.Type;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -57,7 +55,7 @@ public class UserController {
                     userRole.setRole(role);
                     roles.add(userRole);
                     user = userService.create(user, roles);
-                    Response response = new Response("User saved.", SUCCESS, user);
+                    Response response = new Response("User saved.", SUCCESS, modelMapper.map(user, UserDto.class));
                     return new ResponseEntity<>(response, HttpStatus.CREATED);
                 }
 
@@ -93,8 +91,7 @@ public class UserController {
     public ResponseEntity<?> doIgnoreRecord(@PathVariable Long id) {
         User user = userService.getUserById(id).orElseThrow(() -> new UserNotFoundException("User not found!"));
         userService.doIgnoreRecord(id);
-        UserDto userDto = modelMapper.map(user, UserDto.class);
-        Response response = new Response("User registration ignored.", SUCCESS, userDto);
+        Response response = new Response("User registration ignored.", SUCCESS, modelMapper.map(user, UserDto.class));
         return ResponseEntity.ok(response);
     }
 
@@ -102,8 +99,7 @@ public class UserController {
     public ResponseEntity<?> deleteUser(@PathVariable Long id) {
         User user = userService.getUserById(id).orElseThrow(() -> new UserNotFoundException("User not found!"));
         userService.delete(id);
-        UserDto userDto = modelMapper.map(user, UserDto.class);
-        Response response = new Response("Record deleted.", SUCCESS, userDto);
+        Response response = new Response("Record deleted.", SUCCESS, modelMapper.map(user, UserDto.class));
         return ResponseEntity.ok(response);
     }
 
