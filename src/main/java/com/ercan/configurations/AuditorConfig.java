@@ -6,6 +6,7 @@ import org.springframework.data.domain.AuditorAware;
 import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 
 
+
 /**
  * @author Ercan Karakaya 04.12.2021
  */
