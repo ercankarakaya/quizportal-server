@@ -30,7 +30,6 @@ public class UserController {
      **/
     private final ModelMapper modelMapper;
 
-
     /**
      * SERVICES
      **/
