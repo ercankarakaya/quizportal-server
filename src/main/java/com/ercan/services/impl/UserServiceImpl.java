@@ -1,11 +1,12 @@
 package com.ercan.services.impl;
 
 
-import com.ercan.exceptions.UserNotFoundException;
+import com.ercan.exceptions.UserAlreadyExistException;
+import com.ercan.models.Role;
 import com.ercan.models.User;
 import com.ercan.models.UserRole;
-import com.ercan.repositories.RoleRepository;
 import com.ercan.repositories.UserRepository;
+import com.ercan.services.RoleService;
 import com.ercan.services.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,19 +26,28 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private UserRepository userRepository;
     @Autowired
-    private RoleRepository roleRepository;
+    private RoleService roleService;
 
 
-    public User create(User user, Set<UserRole> userRoles) throws Exception {
-        if (!StringUtils.isEmpty(user.getUsername()) && !StringUtils.isEmpty(user.getEmail())) {
+    public User save(User user, Set<UserRole> userRoles) throws Exception {
+        if (checkUserExist(user))
             userRoles.forEach(userRole -> {
-                this.roleRepository.save(userRole.getRole());
+                Role role=roleService.save(userRole.getRole());
+                userRole.setRole(role);
             });
-            user.setUserRoles(userRoles); //user.getUserRoles().addAll(userRoles);
-            return this.userRepository.save(user);
-        } else {
-            throw new Exception("Username or email cannot be empty!");
+        user.setUserRoles(userRoles); //user.getUserRoles().addAll(userRoles);
+        user = userRepository.save(user);
+        return user;
+
+    }
+
+    public boolean checkUserExist(User user) {
+        if (userRepository.existsUsersByUsername(user.getUsername())) {
+            throw new UserAlreadyExistException("Username already present!");
+        } else if (userRepository.existsUserByEmail(user.getEmail())) {
+            throw new UserAlreadyExistException("Email already present!");
         }
+        return true;
     }
 
     public List<User> getAll() {
@@ -45,11 +55,11 @@ public class UserServiceImpl implements UserService {
     }
 
 
-    public User getUserByUsername(String username){
+    public User getUserByUsername(String username) {
         return userRepository.findByUsername(username);
     }
 
-    public Optional<User> getUserById(Long id){
+    public Optional<User> getUserById(Long id) {
         return userRepository.findById(id);
     }
 
@@ -68,6 +78,5 @@ public class UserServiceImpl implements UserService {
     public void doIgnoreRecord(Long id) {
         userRepository.doIgnoreRecord(id);
     }
-
 
 }

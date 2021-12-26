@@ -13,6 +13,8 @@ public interface UserRepository extends JpaRepository<User, Long> {
 
     boolean existsUsersByUsername(String username);
 
+    boolean existsUserByEmail(String email);
+
     @Modifying
     @Query("update User u set u.enabled="+ DatabaseConstant.EnableStatus.PASSIVE+" where u.id=?1")
     void deactivate(Long id);

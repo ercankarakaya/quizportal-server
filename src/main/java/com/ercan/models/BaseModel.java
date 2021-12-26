@@ -12,7 +12,7 @@ import java.io.Serializable;
 import java.util.Calendar;
 
 /**
- * @author Ercan Karakaya 04.12.2021
+ * @author Ercan Karakaya 05.12.2021
  */
 
 @Data

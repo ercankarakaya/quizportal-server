@@ -20,9 +20,10 @@ import static com.ercan.constans.DatabaseConstant.Roles.*;
 import static com.ercan.enums.ResponseStatusEnum.*;
 
 @Slf4j
+@RequiredArgsConstructor
+@CrossOrigin("*")
 @RestController
 @RequestMapping(Mappings.USER_PATH)
-@RequiredArgsConstructor
 public class UserController {
 
     /**
@@ -44,20 +45,20 @@ public class UserController {
         try {
             User user = modelMapper.map(userDto, User.class);
             if (Objects.nonNull(user)) {
-                if (userService.existsUsersByUsername(user.getUsername())) {
-                    return new ResponseEntity<>(new Response("User already present!", WARNING), HttpStatus.MULTI_STATUS);
-                } else {
+
                     Role role = new Role();
                     role.setRoleName(ROLE_USER);
+
                     Set<UserRole> roles = new HashSet<>();
                     UserRole userRole = new UserRole();
                     userRole.setUser(user);
                     userRole.setRole(role);
                     roles.add(userRole);
-                    user = userService.create(user, roles);
+
+                    user.setProfile("default.png");
+                    user = userService.save(user, roles);
                     Response response = new Response("User saved.", SUCCESS, modelMapper.map(user, UserDto.class));
                     return new ResponseEntity<>(response, HttpStatus.CREATED);
-                }
 
             } else {
                 Response response = new Response("User cannot be empty!", WARNING, user);

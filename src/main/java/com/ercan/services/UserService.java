@@ -8,7 +8,7 @@ import java.util.Optional;
 import java.util.Set;
 
 public interface UserService {
-    User create(User user, Set<UserRole> userRoles) throws Exception;
+    User save(User user, Set<UserRole> userRoles) throws Exception;
 
     User getUserByUsername(String username);
 
@@ -23,5 +23,7 @@ public interface UserService {
     void deactivate(Long id);
 
     void doIgnoreRecord(Long id);
+
+    boolean checkUserExist(User user);
 
 }
