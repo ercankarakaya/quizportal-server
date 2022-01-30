@@ -30,24 +30,20 @@ public class UserServiceImpl implements UserService {
 
 
     public User save(User user, Set<UserRole> userRoles) throws Exception {
-        if (checkUserExist(user))
-            userRoles.forEach(userRole -> {
-                Role role=roleService.save(userRole.getRole());
-                userRole.setRole(role);
-            });
-        user.setUserRoles(userRoles); //user.getUserRoles().addAll(userRoles);
-        user = userRepository.save(user);
-        return user;
-
-    }
-
-    public boolean checkUserExist(User user) {
         if (userRepository.existsUsersByUsername(user.getUsername())) {
             throw new UserAlreadyExistException("Username already present!");
         } else if (userRepository.existsUserByEmail(user.getEmail())) {
             throw new UserAlreadyExistException("Email already present!");
+        } else {
+            userRoles.forEach(userRole -> {
+                Role role = roleService.save(userRole.getRole());
+                userRole.setRole(role);
+            });
         }
-        return true;
+        user.setUserRoles(userRoles); //user.getUserRoles().addAll(userRoles);
+        user = userRepository.save(user);
+        return user;
+
     }
 
     public List<User> getAll() {
@@ -78,5 +74,6 @@ public class UserServiceImpl implements UserService {
     public void doIgnoreRecord(Long id) {
         userRepository.doIgnoreRecord(id);
     }
+
 
 }

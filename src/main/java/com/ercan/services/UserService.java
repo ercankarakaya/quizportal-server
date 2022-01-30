@@ -24,6 +24,5 @@ public interface UserService {
 
     void doIgnoreRecord(Long id);
 
-    boolean checkUserExist(User user);
 
 }
