@@ -1,11 +1,11 @@
 # quizportal-server
-Quiz Project Backend. Tools: Spring Boot, Rest API, JPA, Oracle Database or PostgreSQL.
+Quiz Project Backend. Tools:Java, Spring Boot, Rest API, JPA, PostgreSQL.
 
 # Pre-requirements:
 
-### Java 1.8 or 11
+### Java 11
 ### Spring Boot v2.6.0
-### Database: Oracle 18c XE or PostgreSQL
+### Database: PostgreSQL
 ### Hibernate with JPA
 ### Lombok Extension
 
