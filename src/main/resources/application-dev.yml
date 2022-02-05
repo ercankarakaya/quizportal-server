@@ -18,5 +18,5 @@ spring:
     database-platform:  org.hibernate.dialect.PostgreSQL94Dialect #org.hibernate.dialect.Oracle12cDialect
     hibernate:
       ddl-auto: update
-    show-sql: true
+    show-sql: false
 

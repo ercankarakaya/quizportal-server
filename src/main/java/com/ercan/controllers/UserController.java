@@ -1,5 +1,7 @@
 package com.ercan.controllers;
 
+import com.ercan.annotations.LogEntryExit;
+import com.ercan.aspects.LoggingAspect;
 import com.ercan.constans.Mappings;
 import com.ercan.dtos.UserDto;
 import com.ercan.exceptions.UserNotFoundException;
@@ -8,18 +10,20 @@ import com.ercan.response.*;
 import com.ercan.services.*;
 import lombok.*;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.*;
 import org.springframework.http.*;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.temporal.ChronoUnit;
 import java.util.*;
 import java.util.stream.Collectors;
 
 import static com.ercan.constans.DatabaseConstant.Roles.*;
 import static com.ercan.enums.ResponseStatusEnum.*;
 
-@Slf4j
 @RequiredArgsConstructor
 @CrossOrigin("*")
 @RestController
@@ -40,6 +44,7 @@ public class UserController {
     private RoleService roleService;
 
 
+    @LogEntryExit(showArgs = true, showResult = true, unit = ChronoUnit.MILLIS)
     @PostMapping(Mappings.SAVE)
     public ResponseEntity<?> createUser(@RequestBody UserDto userDto) throws Exception {
         try {
@@ -65,7 +70,6 @@ public class UserController {
                 return new ResponseEntity<>(response, HttpStatus.MULTI_STATUS);
             }
         } catch (Exception ex) {
-            log.error(ex.getMessage());
             return ErrorResponse.buildResponseEntity(new ErrorResponse(HttpStatus.BAD_REQUEST, ex.getMessage()));
             //return Response.badRequest(new Response(ex.getMessage(), ERROR));
             //new ResponseEntity<>(new Response(e.getMessage(), BAD_REQUEST), HttpStatus.BAD_REQUEST);

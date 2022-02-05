@@ -18,7 +18,6 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
-@Slf4j
 @Service
 @Transactional
 public class UserServiceImpl implements UserService {
