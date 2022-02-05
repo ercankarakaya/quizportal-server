@@ -23,7 +23,6 @@ public class LoggingAspect {
 
     private static final Logger logger = LogManager.getLogger(LoggingAspect.class);
 
-
     @Pointcut("execution(* com.ercan.QuizportalServerApplication.main(..))")
     public void main() {
     }
@@ -35,20 +34,20 @@ public class LoggingAspect {
         throw new UnsupportedOperationException();
     }
 
+
     @Pointcut("within(com.ercan.repositories..*) || within(com.ercan.services.impl..*)")
     public void applicationPackagePointcut() {
         throw new UnsupportedOperationException();
     }
 
+
     @Pointcut("within(com.ercan.controllers..*)")
-    public void controllersPointcut() {
-        throw new UnsupportedOperationException();
+    public void controllersPointcut() {throw new UnsupportedOperationException();
     }
 
     @Pointcut("@annotation(com.ercan.annotations.LogEntryExit)")
-    public void logEntryExitPointcut() {
-        throw new UnsupportedOperationException();
-    }
+    public void logEntryExitPointcut() {throw new UnsupportedOperationException();}
+
 
     @Around("controllersPointcut() && !logEntryExitPointcut()")
     public Object logAllMethod(ProceedingJoinPoint joinPoint) throws Throwable {
