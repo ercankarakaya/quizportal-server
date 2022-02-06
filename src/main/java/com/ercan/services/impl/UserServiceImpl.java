@@ -9,6 +9,7 @@ import com.ercan.models.UserRole;
 import com.ercan.repositories.UserRepository;
 import com.ercan.services.RoleService;
 import com.ercan.services.UserService;
+import com.ercan.utils.constans.DatabaseConstant;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
@@ -69,15 +70,14 @@ public class UserServiceImpl implements UserService {
 
     public User deactivate(Long id) {
         User user = userRepository.findById(id).orElseThrow(() -> new UserNotFoundException("User not found!"));
-        userRepository.deactivate(user.getId());
-        return userRepository.getById(user.getId());
+        user.setEnabled(DatabaseConstant.EnableStatus.PASSIVE);
+        return userRepository.save(user);
     }
 
     public User doIgnoreRecord(Long id) {
         User user = userRepository.findById(id).orElseThrow(() -> new UserNotFoundException("User not found!"));
-        userRepository.doIgnoreRecord(id);
-        User userUpdate = userRepository.getById(id);
-        return userUpdate;
+        user.setRecordStatus(DatabaseConstant.RecordStatus.PASSIVE);
+        return userRepository.save(user);
     }
 
 }

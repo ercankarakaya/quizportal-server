@@ -7,6 +7,7 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
+import java.util.Calendar;
 import java.util.Optional;
 
 @Repository
@@ -18,10 +19,12 @@ public interface UserRepository extends JpaRepository<User, Long> {
     boolean existsUserByEmail(String email);
 
     @Modifying
-    @Query("update User u set u.enabled="+ DatabaseConstant.EnableStatus.PASSIVE+" where u.id=?1")
-    void deactivate(Long id);
+    @Query("update User u set u.enabled=" + DatabaseConstant.EnableStatus.PASSIVE +
+            ", u.lastModifiedBy=?2,u.lastModifiedDate=?3 where u.id=?1")
+    void deactivate(Long id, String modifiedUser, Calendar modifiedDate);
 
     @Modifying
-    @Query("update User u set u.recordStatus="+ DatabaseConstant.RecordStatus.PASSIVE+" where u.id=?1")
-    void doIgnoreRecord(Long id);
+    @Query("update User u set u.recordStatus=" + DatabaseConstant.RecordStatus.PASSIVE +
+            ", u.lastModifiedBy=?2,u.lastModifiedDate=?3 where u.id=?1")
+    void doIgnoreRecord(Long id, String modifiedUser, Calendar modifiedDate);
 }
