@@ -2,18 +2,17 @@ package com.ercan.services.impl;
 
 
 import com.ercan.exceptions.UserAlreadyExistException;
+import com.ercan.exceptions.UserNotFoundException;
 import com.ercan.models.Role;
 import com.ercan.models.User;
 import com.ercan.models.UserRole;
 import com.ercan.repositories.UserRepository;
 import com.ercan.services.RoleService;
 import com.ercan.services.UserService;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.util.StringUtils;
 
 import java.util.List;
 import java.util.Optional;
@@ -68,12 +67,17 @@ public class UserServiceImpl implements UserService {
         userRepository.deleteById(id);
     }
 
-    public void deactivate(Long id) {
-        userRepository.deactivate(id);
+    public User deactivate(Long id) {
+        User user = userRepository.findById(id).orElseThrow(() -> new UserNotFoundException("User not found!"));
+        userRepository.deactivate(user.getId());
+        return userRepository.getById(user.getId());
     }
 
-    public void doIgnoreRecord(Long id) {
+    public User doIgnoreRecord(Long id) {
+        User user = userRepository.findById(id).orElseThrow(() -> new UserNotFoundException("User not found!"));
         userRepository.doIgnoreRecord(id);
+        User userUpdate = userRepository.getById(id);
+        return userUpdate;
     }
 
 }

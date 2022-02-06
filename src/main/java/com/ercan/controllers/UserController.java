@@ -47,19 +47,19 @@ public class UserController {
             User user = modelMapper.map(userDto, User.class);
             if (Objects.nonNull(user)) {
 
-                    Role role = new Role();
-                    role.setRoleName(ROLE_USER);
+                Role role = new Role();
+                role.setRoleName(ROLE_USER);
 
-                    Set<UserRole> roles = new HashSet<>();
-                    UserRole userRole = new UserRole();
-                    userRole.setUser(user);
-                    userRole.setRole(role);
-                    roles.add(userRole);
+                Set<UserRole> roles = new HashSet<>();
+                UserRole userRole = new UserRole();
+                userRole.setUser(user);
+                userRole.setRole(role);
+                roles.add(userRole);
 
-                    user.setProfile("default.png");
-                    user = userService.save(user, roles);
-                    Response response = new Response("User saved.", SUCCESS, modelMapper.map(user, UserDto.class));
-                    return new ResponseEntity<>(response, HttpStatus.CREATED);
+                user.setProfile("default.png");
+                user = userService.save(user, roles);
+                Response response = new Response("User saved.", SUCCESS, modelMapper.map(user, UserDto.class));
+                return new ResponseEntity<>(response, HttpStatus.CREATED);
 
             } else {
                 Response response = new Response("User cannot be empty!", WARNING, user);
@@ -90,25 +90,16 @@ public class UserController {
 
     @PutMapping(Mappings.BY_ID)
     public ResponseEntity<?> doIgnoreRecord(@PathVariable Long id) {
-        User user = userService.getUserById(id).orElseThrow(() -> new UserNotFoundException("User not found!"));
-        userService.doIgnoreRecord(id);
-        Response response = new Response("User registration ignored.", SUCCESS, modelMapper.map(user, UserDto.class));
-        return ResponseEntity.ok(response);
+        User user=userService.doIgnoreRecord(id);
+        return ResponseEntity.ok(modelMapper.map(user, UserDto.class));
     }
 
     @DeleteMapping(Mappings.BY_ID)
     public ResponseEntity<?> deleteUser(@PathVariable Long id) {
         User user = userService.getUserById(id).orElseThrow(() -> new UserNotFoundException("User not found!"));
         userService.delete(id);
-        Response response = new Response("Record deleted.", SUCCESS, modelMapper.map(user, UserDto.class));
-        return ResponseEntity.ok(response);
+        return ResponseEntity.ok(modelMapper.map(user, UserDto.class));
     }
-
-    @ExceptionHandler(UserNotFoundException.class)
-    public ResponseEntity<?> exceptionHandler(UserNotFoundException ex){
-        return ResponseEntity.ok(ex);
-    }
-
 
 
 }

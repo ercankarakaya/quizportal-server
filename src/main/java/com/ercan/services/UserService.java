@@ -20,9 +20,9 @@ public interface UserService {
 
     void delete(Long id);
 
-    void deactivate(Long id);
+    User deactivate(Long id);
 
-    void doIgnoreRecord(Long id);
+    User doIgnoreRecord(Long id);
 
 
 }

@@ -123,9 +123,9 @@ public class LoggingAspect {
         }
     }
 
-    @AfterThrowing(value = "springBeanPointcut()||applicationPackagePointcut()", throwing = "ex")
+    @AfterThrowing(value = "applicationPackagePointcut()", throwing = "ex")
     public void logAfterThrowing(JoinPoint joinPoint, Exception ex) {
-        logger.error("Exception message --> {} ", ex.getMessage().toUpperCase());
+        logger.error("ERROR : {} ", ex.getMessage().toUpperCase());
     }
 
 }
