@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping(Mappings.AUTH)
-public class AuthenticateController {
+public class AuthController {
 
     @Autowired
     private AuthenticationManager authenticationManager;
@@ -45,7 +45,6 @@ public class AuthenticateController {
     }
 
     private void authenticate(String username, String password) throws Exception {
-
         try {
             authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username, password));
         } catch (DisabledException e) {
@@ -53,7 +52,6 @@ public class AuthenticateController {
         } catch (BadCredentialsException e) {
             throw new Exception("Invalid Credentials " + e.getMessage());
         }
-
     }
 
 }
