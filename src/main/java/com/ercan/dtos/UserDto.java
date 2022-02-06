@@ -1,8 +1,5 @@
 package com.ercan.dtos;
 
-import com.ercan.models.Role;
-import com.ercan.models.User;
-import com.ercan.models.UserRole;
 import lombok.AccessLevel;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
@@ -22,5 +19,6 @@ public class UserDto extends BaseDto {
     String email;
     String phone;
     String profile;
+    Integer enabled;
     List<RoleDto> roles;
 }

@@ -52,7 +52,8 @@ public class User extends BaseModel implements UserDetails {
                 .map(Role::getRoleName)
                 .map(Authority::new)
                 .forEach(authoritySet::add);
-        return null;
+
+        return authoritySet;
     }
 
     @Override

@@ -1,4 +1,4 @@
-package com.ercan.security.jwt;
+package com.ercan.dtos;
 
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
@@ -10,7 +10,7 @@ import lombok.experimental.FieldDefaults;
 @NoArgsConstructor
 @AllArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class JwtRequest {
+public class LoginRequest {
     String username;
     String password;
 

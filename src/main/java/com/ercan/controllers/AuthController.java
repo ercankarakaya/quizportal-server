@@ -1,8 +1,8 @@
 package com.ercan.controllers;
 
 import com.ercan.exceptions.UserNotFoundException;
-import com.ercan.security.jwt.JwtRequest;
-import com.ercan.security.jwt.JwtResponse;
+import com.ercan.dtos.LoginRequest;
+import com.ercan.dtos.LoginResponse;
 import com.ercan.security.jwt.JwtUtil;
 import com.ercan.services.impl.UserDetailsServiceImpl;
 import com.ercan.utils.constans.Mappings;
@@ -31,17 +31,21 @@ public class AuthController {
 
 
     @PostMapping(Mappings.GENERATE_TOKEN)
-    public ResponseEntity<?> generateToken(@RequestBody JwtRequest jwtRequest) throws Exception {
+    public ResponseEntity<?> generateToken(@RequestBody LoginRequest loginRequest) throws Exception {
         try {
-            authenticate(jwtRequest.getUsername(), jwtRequest.getPassword());
+            authenticate(loginRequest.getUsername(), loginRequest.getPassword());
         } catch (UserNotFoundException e) {
             e.printStackTrace();
             throw new Exception("User not found ");
         }
 
-        UserDetails userDetails = this.userDetailsService.loadUserByUsername(jwtRequest.getUsername());
+        UserDetails userDetails = this.userDetailsService.loadUserByUsername(loginRequest.getUsername());
         String token = this.jwtUtil.generateToken(userDetails);
-        return ResponseEntity.ok(new JwtResponse(token));
+        return ResponseEntity.ok(LoginResponse.builder()
+                .token(token)
+                .username(loginRequest.getUsername())
+                .authType("Bearer")
+                .build());
     }
 
     private void authenticate(String username, String password) throws Exception {
