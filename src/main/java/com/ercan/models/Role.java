@@ -1,6 +1,6 @@
 package com.ercan.models;
 
-import com.ercan.constans.DatabaseConstant;
+import com.ercan.utils.constans.DatabaseConstant;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 import lombok.experimental.FieldDefaults;

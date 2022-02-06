@@ -1,6 +1,6 @@
 package com.ercan.models;
 
-import com.ercan.constans.DatabaseConstant;
+import com.ercan.utils.constans.DatabaseConstant;
 import lombok.AccessLevel;
 import lombok.Data;
 import lombok.experimental.FieldDefaults;

@@ -1,17 +1,13 @@
 package com.ercan.controllers;
 
 import com.ercan.annotations.LogEntryExit;
-import com.ercan.aspects.LoggingAspect;
-import com.ercan.constans.Mappings;
+import com.ercan.utils.constans.Mappings;
 import com.ercan.dtos.UserDto;
 import com.ercan.exceptions.UserNotFoundException;
 import com.ercan.models.*;
 import com.ercan.response.*;
 import com.ercan.services.*;
 import lombok.*;
-import lombok.extern.slf4j.Slf4j;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.*;
 import org.springframework.http.*;
@@ -21,7 +17,7 @@ import java.time.temporal.ChronoUnit;
 import java.util.*;
 import java.util.stream.Collectors;
 
-import static com.ercan.constans.DatabaseConstant.Roles.*;
+import static com.ercan.utils.constans.DatabaseConstant.Roles.*;
 import static com.ercan.enums.ResponseStatusEnum.*;
 
 @RequiredArgsConstructor
@@ -107,6 +103,12 @@ public class UserController {
         Response response = new Response("Record deleted.", SUCCESS, modelMapper.map(user, UserDto.class));
         return ResponseEntity.ok(response);
     }
+
+    @ExceptionHandler(UserNotFoundException.class)
+    public ResponseEntity<?> exceptionHandler(UserNotFoundException ex){
+        return ResponseEntity.ok(ex);
+    }
+
 
 
 }

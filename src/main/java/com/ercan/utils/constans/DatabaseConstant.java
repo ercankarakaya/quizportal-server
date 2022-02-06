@@ -1,4 +1,4 @@
-package com.ercan.constans;
+package com.ercan.utils.constans;
 
 public class DatabaseConstant {
 

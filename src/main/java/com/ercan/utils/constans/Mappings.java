@@ -1,4 +1,4 @@
-package com.ercan.constans;
+package com.ercan.utils.constans;
 
 public class Mappings {
     public static final String BASE_PATH = "/api";
@@ -7,4 +7,6 @@ public class Mappings {
     public static final String BY_USERNAME = "/{username}";
     public static final String BY_ID = "/{id}";
     public static final String ALL = "/all";
+    public static final String AUTH = BASE_PATH + "/auth";
+    public static final String GENERATE_TOKEN="/generate-token";
 }
