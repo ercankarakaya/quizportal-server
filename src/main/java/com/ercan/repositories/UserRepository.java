@@ -21,10 +21,10 @@ public interface UserRepository extends JpaRepository<User, Long> {
     @Modifying
     @Query("update User u set u.enabled=" + DatabaseConstant.EnableStatus.PASSIVE +
             ", u.lastModifiedBy=?2,u.lastModifiedDate=?3 where u.id=?1")
-    void deactivate(Long id, String modifiedUser, Calendar modifiedDate);
+    void deactivate(Long id, String modifiedByUser, Calendar modifiedDate);
 
     @Modifying
     @Query("update User u set u.recordStatus=" + DatabaseConstant.RecordStatus.PASSIVE +
             ", u.lastModifiedBy=?2,u.lastModifiedDate=?3 where u.id=?1")
-    void doIgnoreRecord(Long id, String modifiedUser, Calendar modifiedDate);
+    void doIgnoreRecord(Long id, String modifiedByUser, Calendar modifiedDate);
 }
