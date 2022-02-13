@@ -29,7 +29,7 @@ create table roles
     role_name          varchar(255)
 );
 
----- User_Role Table Script ---
+---- UserRole Table Script ---
 create table user_role
 (
     id                 bigint not null constraint user_role_pkey primary key,
