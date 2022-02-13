@@ -50,13 +50,13 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
             try {
                 username = this.jwtUtil.extractUsername(jwtToken);
             } catch (ExpiredJwtException e) {
-                logger.error("Jwt token has expired -> {}", e.getMessage());
+                logger.error("EXCEPTION : Jwt token has expired -> {}", e.getMessage());
             } catch (SignatureException e) {
-                logger.error("Authentication Failed. Login informations not valid.");
+                logger.error("EXCEPTION : Authentication Failed. Login informations not valid. ");
             } catch (IllegalArgumentException e) {
-                logger.error("Illegal argument -> {}", e);
+                logger.error("EXCEPTION : Illegal argument -> {}", e);
             } catch (Exception e) {
-                logger.error("error -> {}", e.getMessage());
+                logger.error("EXCEPTION : {}", e.getMessage());
             }
 
         } else {
