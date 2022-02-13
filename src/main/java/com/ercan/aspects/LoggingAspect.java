@@ -124,8 +124,8 @@ public class LoggingAspect {
     }
 
     @AfterThrowing(value = "applicationPackagePointcut()", throwing = "ex")
-    public void logAfterThrowing(JoinPoint joinPoint, Exception ex) {
-        logger.error("ERROR : {} ", ex.getMessage().toUpperCase());
+    public void logAfterThrowing(JoinPoint joinPoint, Throwable ex) {
+        logger.error("EXCEPTION : "+ ex);
     }
 
 }
