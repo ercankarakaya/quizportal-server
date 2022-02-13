@@ -1,5 +1,5 @@
 # quizportal-server
-Quiz Project Backend. Tools:Java, Spring Boot, Rest API, JPA, PostgreSQL.
+This is a quiz application.
 
 # Pre-requirements:
 
