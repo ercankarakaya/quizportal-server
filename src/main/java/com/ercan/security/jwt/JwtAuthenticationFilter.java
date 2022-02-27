@@ -40,7 +40,6 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                                     FilterChain filterChain) throws ServletException, IOException {
 
         String requestTokenHeader = request.getHeader(HEADER_STRING);
-        logger.info("requestTokenHeader :: {}", requestTokenHeader);
         String username = null;
         String jwtToken = null;
 

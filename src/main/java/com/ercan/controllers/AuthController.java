@@ -1,68 +1,96 @@
 package com.ercan.controllers;
 
-import com.ercan.exceptions.UserNotFoundException;
+import com.ercan.annotations.LogEntryExit;
+import com.ercan.aspects.LoggingAspect;
+import com.ercan.dtos.UserDto;
 import com.ercan.dtos.LoginRequest;
-import com.ercan.dtos.LoginResponse;
+import com.ercan.models.Role;
 import com.ercan.models.User;
-import com.ercan.security.SecurityUtil;
-import com.ercan.security.jwt.JwtUtil;
-import com.ercan.services.impl.UserDetailsServiceImpl;
+import com.ercan.models.UserRole;
+import com.ercan.response.ErrorResponse;
+import com.ercan.response.Response;
+import com.ercan.services.AuthService;
 import com.ercan.utils.constans.Mappings;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.BadCredentialsException;
-import org.springframework.security.authentication.DisabledException;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
-import java.security.Principal;
+import java.time.temporal.ChronoUnit;
+import java.util.HashSet;
+import java.util.Objects;
+import java.util.Set;
+
+import static com.ercan.enums.ResponseStatusEnum.SUCCESS;
+import static com.ercan.enums.ResponseStatusEnum.WARNING;
+import static com.ercan.utils.constans.DatabaseConstant.Roles.ROLE_USER;
+
 
 @CrossOrigin("*")
 @RestController
 @RequestMapping(Mappings.AUTH)
 public class AuthController {
 
+    private static final Logger logger = LogManager.getLogger(LoggingAspect.class);
+
+    /**
+     * MODEL - CLASS
+     **/
+    private final ModelMapper modelMapper;
+
+    /**
+     * SERVICES
+     **/
     @Autowired
-    private AuthenticationManager authenticationManager;
-    @Autowired
-    private UserDetailsServiceImpl userDetailsService;
-    @Autowired
-    private JwtUtil jwtUtil;
+    private AuthService authService;
 
 
-    @PostMapping(Mappings.GENERATE_TOKEN)
-    public ResponseEntity<?> generateToken(@RequestBody LoginRequest loginRequest) throws Exception {
-        try {
-            authenticate(loginRequest.getUsername(), loginRequest.getPassword());
-        } catch (UserNotFoundException e) {
-            e.printStackTrace();
-            throw new Exception("User not found ");
-        }
-
-        UserDetails userDetails = this.userDetailsService.loadUserByUsername(loginRequest.getUsername());
-        String token = this.jwtUtil.generateToken(userDetails);
-        return ResponseEntity.ok(LoginResponse.builder()
-                .token(token)
-                .username(loginRequest.getUsername())
-                .authType("Bearer")
-                .build());
+    public AuthController(ModelMapper modelMapper) {
+        this.modelMapper = modelMapper;
     }
 
-    private void authenticate(String username, String password) throws Exception {
+    @LogEntryExit(showArgs = true, showResult = true, unit = ChronoUnit.MILLIS)
+    @PostMapping(Mappings.SIGNUP)
+    public ResponseEntity<?> signup(@RequestBody UserDto userDto) throws Exception {
         try {
-            authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username, password));
-        } catch (DisabledException e) {
-            throw new Exception("User Disabled " + e.getMessage());
-        } catch (BadCredentialsException e) {
-            throw new Exception("Invalid Credentials " + e.getMessage());
+            User user = modelMapper.map(userDto, User.class);
+            if (Objects.nonNull(user)) {
+
+                Role role = new Role();
+                role.setRoleName(ROLE_USER);
+
+                Set<UserRole> roles = new HashSet<>();
+                UserRole userRole = new UserRole();
+                userRole.setUser(user);
+                userRole.setRole(role);
+                roles.add(userRole);
+
+                user.setProfile("default.png");
+                user = authService.signup(user, roles);
+                Response response = new Response("User registered.", SUCCESS, modelMapper.map(user, UserDto.class));
+                return new ResponseEntity<>(response, HttpStatus.CREATED);
+
+            } else {
+                Response response = new Response("User cannot be empty!", WARNING, user);
+                return new ResponseEntity<>(response, HttpStatus.MULTI_STATUS);
+            }
+        } catch (Exception ex) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST,ex.getMessage());
         }
+    }
+
+    @PostMapping(Mappings.SIGNIN)
+    public ResponseEntity<?> signin(@RequestBody LoginRequest loginRequest) throws Exception {
+        return ResponseEntity.ok(authService.signin(loginRequest));
     }
 
     @GetMapping(Mappings.CURRENT_USER)
-    public User getCurrentUser(Principal principal){
-        return (User) userDetailsService.loadUserByUsername(principal.getName());
+    public ResponseEntity<?> getCurrentUser() {
+        return ResponseEntity.ok(authService.getCurrentUser());
     }
 
 }

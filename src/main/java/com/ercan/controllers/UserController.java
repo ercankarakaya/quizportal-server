@@ -7,12 +7,11 @@ import com.ercan.exceptions.UserNotFoundException;
 import com.ercan.models.*;
 import com.ercan.response.*;
 import com.ercan.services.*;
-import lombok.*;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.*;
 import org.springframework.http.*;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.time.temporal.ChronoUnit;
 import java.util.*;
@@ -22,7 +21,6 @@ import static com.ercan.utils.constans.DatabaseConstant.Roles.*;
 import static com.ercan.enums.ResponseStatusEnum.*;
 
 @CrossOrigin("*")
-@RequiredArgsConstructor
 @RestController
 @RequestMapping(Mappings.USER_PATH)
 public class UserController {
@@ -41,10 +39,14 @@ public class UserController {
     private RoleService roleService;
 
 
+    public UserController(ModelMapper modelMapper) {
+        this.modelMapper = modelMapper;
+    }
+
 
     @LogEntryExit(showArgs = true, showResult = true, unit = ChronoUnit.MILLIS)
     @PostMapping(Mappings.SAVE)
-    public ResponseEntity<?> registerUser(@RequestBody UserDto userDto) throws Exception {
+    public ResponseEntity<?> createUser(@RequestBody UserDto userDto) throws Exception {
         try {
             User user = modelMapper.map(userDto, User.class);
             if (Objects.nonNull(user)) {
@@ -68,7 +70,8 @@ public class UserController {
                 return new ResponseEntity<>(response, HttpStatus.MULTI_STATUS);
             }
         } catch (Exception ex) {
-            return ErrorResponse.buildResponseEntity(new ErrorResponse(HttpStatus.BAD_REQUEST, ex.getMessage()));
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST,ex.getMessage());
+            //return ErrorResponse.buildResponseEntity(new ErrorResponse(HttpStatus.BAD_REQUEST, ex.getMessage()));
             //return Response.badRequest(new Response(ex.getMessage(), ERROR));
             //new ResponseEntity<>(new Response(e.getMessage(), BAD_REQUEST), HttpStatus.BAD_REQUEST);
         }

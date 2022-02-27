@@ -10,4 +10,6 @@ public class Mappings {
     public static final String AUTH = BASE_PATH + "/auth";
     public static final String GENERATE_TOKEN="/generate-token";
     public static final String CURRENT_USER="/current-user";
+    public static final String SIGNIN="/signin";
+    public static final String SIGNUP="/signup";
 }

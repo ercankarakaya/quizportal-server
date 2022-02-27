@@ -1,4 +1,4 @@
-package com.ercan.security;
+package com.ercan.utils;
 
 import com.ercan.models.User;
 import org.springframework.security.core.Authentication;

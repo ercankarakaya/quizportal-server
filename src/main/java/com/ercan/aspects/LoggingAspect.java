@@ -71,7 +71,7 @@ public class LoggingAspect {
                     joinPoint.getSignature().getName(), result);
 
             //Log method execution time
-            logger.info("Total process time :: {}", stopWatch.getTotalTimeMillis() + " ms");
+            //logger.info("Total process time :: {}", stopWatch.getTotalTimeMillis() + " ms");
 
             return result;
         } catch (IllegalArgumentException e) {
