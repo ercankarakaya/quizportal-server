@@ -1,4 +1,4 @@
-package com.ercan.configurations;
+package com.ercan.security;
 
 import com.ercan.security.jwt.JwtAuthenticationEntryPoint;
 import com.ercan.security.jwt.JwtAuthenticationFilter;
@@ -41,7 +41,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Bean
     public PasswordEncoder passwordEncoder(){
-        return NoOpPasswordEncoder.getInstance();
+        return new BCryptPasswordEncoder();
     }
 
     @Override
@@ -57,6 +57,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .cors().disable()
                 .authorizeHttpRequests()
                 .antMatchers("/api/auth/**").permitAll() // .antMatchers("/api/auth/generate-token","/api/user/").permitAll()
+                .antMatchers("/api/user/**").permitAll()
                 .antMatchers(HttpMethod.OPTIONS).permitAll()
                 .anyRequest().authenticated()
                 .and()

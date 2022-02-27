@@ -9,4 +9,5 @@ public class Mappings {
     public static final String ALL = "/all";
     public static final String AUTH = BASE_PATH + "/auth";
     public static final String GENERATE_TOKEN="/generate-token";
+    public static final String CURRENT_USER="/current-user";
 }

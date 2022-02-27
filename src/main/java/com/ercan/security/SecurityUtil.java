@@ -6,7 +6,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 
 @Component
-public class SecurityManager {
+public class SecurityUtil {
 
     public static User getCurrentUser(){
         if(SecurityContextHolder.getContext() == null || SecurityContextHolder.getContext().getAuthentication() == null){

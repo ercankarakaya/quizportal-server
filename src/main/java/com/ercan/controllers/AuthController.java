@@ -3,6 +3,8 @@ package com.ercan.controllers;
 import com.ercan.exceptions.UserNotFoundException;
 import com.ercan.dtos.LoginRequest;
 import com.ercan.dtos.LoginResponse;
+import com.ercan.models.User;
+import com.ercan.security.SecurityUtil;
 import com.ercan.security.jwt.JwtUtil;
 import com.ercan.services.impl.UserDetailsServiceImpl;
 import com.ercan.utils.constans.Mappings;
@@ -13,11 +15,11 @@ import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.DisabledException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import java.security.Principal;
+
+@CrossOrigin("*")
 @RestController
 @RequestMapping(Mappings.AUTH)
 public class AuthController {
@@ -56,6 +58,11 @@ public class AuthController {
         } catch (BadCredentialsException e) {
             throw new Exception("Invalid Credentials " + e.getMessage());
         }
+    }
+
+    @GetMapping(Mappings.CURRENT_USER)
+    public User getCurrentUser(Principal principal){
+        return (User) userDetailsService.loadUserByUsername(principal.getName());
     }
 
 }

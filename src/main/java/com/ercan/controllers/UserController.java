@@ -11,6 +11,7 @@ import lombok.*;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.*;
 import org.springframework.http.*;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.temporal.ChronoUnit;
@@ -20,8 +21,8 @@ import java.util.stream.Collectors;
 import static com.ercan.utils.constans.DatabaseConstant.Roles.*;
 import static com.ercan.enums.ResponseStatusEnum.*;
 
-@RequiredArgsConstructor
 @CrossOrigin("*")
+@RequiredArgsConstructor
 @RestController
 @RequestMapping(Mappings.USER_PATH)
 public class UserController {
@@ -40,9 +41,10 @@ public class UserController {
     private RoleService roleService;
 
 
+
     @LogEntryExit(showArgs = true, showResult = true, unit = ChronoUnit.MILLIS)
     @PostMapping(Mappings.SAVE)
-    public ResponseEntity<?> createUser(@RequestBody UserDto userDto) throws Exception {
+    public ResponseEntity<?> registerUser(@RequestBody UserDto userDto) throws Exception {
         try {
             User user = modelMapper.map(userDto, User.class);
             if (Objects.nonNull(user)) {
