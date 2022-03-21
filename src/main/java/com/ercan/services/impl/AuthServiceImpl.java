@@ -34,8 +34,6 @@ public class AuthServiceImpl implements AuthService {
     @Autowired
     private RoleService roleService;
     @Autowired
-    private PasswordEncoder passwordEncoder;
-    @Autowired
     private AuthenticationManager authenticationManager;
     @Autowired
     private JwtUtil jwtUtil;
@@ -78,7 +76,6 @@ public class AuthServiceImpl implements AuthService {
             });
         }
         user.setUserRoles(userRoles); //user.getUserRoles().addAll(userRoles);
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
         user = userRepository.save(user);
         return user;
     }

@@ -17,6 +17,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
@@ -47,6 +48,8 @@ public class AuthController {
      **/
     @Autowired
     private AuthService authService;
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
 
     public AuthController(ModelMapper modelMapper) {
@@ -70,6 +73,7 @@ public class AuthController {
                 roles.add(userRole);
 
                 user.setProfile("default.png");
+                user.setPassword(passwordEncoder.encode(user.getPassword()));
                 user = authService.signup(user, roles);
                 Response response = new Response("User registered.", SUCCESS, modelMapper.map(user, UserDto.class));
                 return new ResponseEntity<>(response, HttpStatus.CREATED);

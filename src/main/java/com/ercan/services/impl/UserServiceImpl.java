@@ -28,8 +28,6 @@ public class UserServiceImpl implements UserService {
     private UserRepository userRepository;
     @Autowired
     private RoleService roleService;
-    @Autowired
-    private PasswordEncoder passwordEncoder;
 
 
     public User save(User user, Set<UserRole> userRoles) throws Exception {
@@ -44,7 +42,6 @@ public class UserServiceImpl implements UserService {
             });
         }
         user.setUserRoles(userRoles); //user.getUserRoles().addAll(userRoles);
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
         user = userRepository.save(user);
         return user;
 

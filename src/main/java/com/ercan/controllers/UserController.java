@@ -10,6 +10,7 @@ import com.ercan.services.*;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.*;
 import org.springframework.http.*;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
@@ -37,6 +38,8 @@ public class UserController {
     private UserService userService;
     @Autowired
     private RoleService roleService;
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
 
     public UserController(ModelMapper modelMapper) {
@@ -61,6 +64,7 @@ public class UserController {
                 roles.add(userRole);
 
                 user.setProfile("default.png");
+                user.setPassword(passwordEncoder.encode(user.getPassword()));
                 user = userService.save(user, roles);
                 Response response = new Response("User saved.", SUCCESS, modelMapper.map(user, UserDto.class));
                 return new ResponseEntity<>(response, HttpStatus.CREATED);
