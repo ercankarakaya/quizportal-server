@@ -94,7 +94,7 @@ public class UserController {
     public ResponseEntity<?> getUserByUsername(@PathVariable("username") String username) {
         User user = userService.getUserByUsername(username);
         return Optional.ofNullable(user).map(u -> modelMapper.map(user, UserDto.class))
-                .map(ResponseEntity::ok).orElseThrow(() -> new UserNotFoundException("User not found!"));
+                .map(ResponseEntity::ok).orElseThrow(() -> new UserNotFoundException());
     }
 
     @PutMapping(Mappings.BY_ID)
@@ -105,7 +105,7 @@ public class UserController {
 
     @DeleteMapping(Mappings.BY_ID)
     public ResponseEntity<?> deleteUser(@PathVariable Long id) {
-        User user = userService.getUserById(id).orElseThrow(() -> new UserNotFoundException("User not found!"));
+        User user = userService.getUserById(id).orElseThrow(() -> new UserNotFoundException());
         userService.delete(id);
         return ResponseEntity.ok(modelMapper.map(user, UserDto.class));
     }

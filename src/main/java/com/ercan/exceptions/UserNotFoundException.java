@@ -5,6 +5,11 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 
 @ResponseStatus(code = HttpStatus.ALREADY_REPORTED)
 public class UserNotFoundException extends RuntimeException {
+
+    public UserNotFoundException() {
+        super("User not found!");
+    }
+
     public UserNotFoundException(String message) {
         super(message);
     }

@@ -16,6 +16,8 @@ public interface UserService {
 
     boolean existsUsersByUsername(String username);
 
+    boolean existsUserByEmail(String email);
+
     List<User> getAll();
 
     void delete(Long id);
