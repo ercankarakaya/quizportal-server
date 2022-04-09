@@ -1,4 +1,4 @@
-package com.ercan.dtos;
+package com.ercan.dtos.responses;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

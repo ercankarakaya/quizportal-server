@@ -1,4 +1,4 @@
-package com.ercan.dtos;
+package com.ercan.dtos.requests;
 
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;

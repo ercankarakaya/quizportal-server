@@ -1,8 +1,8 @@
 package com.ercan.services.impl;
 
 import com.ercan.aspects.LoggingAspect;
-import com.ercan.dtos.LoginRequest;
-import com.ercan.dtos.LoginResponse;
+import com.ercan.dtos.requests.LoginRequest;
+import com.ercan.dtos.responses.LoginResponse;
 import com.ercan.exceptions.UserAlreadyExistException;
 import com.ercan.exceptions.UserNotFoundException;
 import com.ercan.models.Role;

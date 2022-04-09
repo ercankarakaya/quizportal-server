@@ -1,7 +1,7 @@
 package com.ercan.services;
 
-import com.ercan.dtos.LoginRequest;
-import com.ercan.dtos.LoginResponse;
+import com.ercan.dtos.requests.LoginRequest;
+import com.ercan.dtos.responses.LoginResponse;
 import com.ercan.models.User;
 import com.ercan.models.UserRole;
 import org.springframework.security.core.Authentication;
