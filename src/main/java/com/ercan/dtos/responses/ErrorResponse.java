@@ -1,4 +1,4 @@
-package com.ercan.response;
+package com.ercan.dtos.responses;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AccessLevel;

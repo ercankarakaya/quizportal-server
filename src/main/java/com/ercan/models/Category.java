@@ -14,6 +14,7 @@ import java.util.*;
 @Table(name = "categories")
 @RequiredArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
+@Where(clause = "record_status="+DatabaseConstant.RecordStatus.ACTIVE)
 public class Category extends BaseModel {
 
     String title;
@@ -21,6 +22,5 @@ public class Category extends BaseModel {
 
     @JsonIgnore
     @OneToMany(mappedBy = "category", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @Where(clause = "record_status=" + DatabaseConstant.RecordStatus.ACTIVE)
     Set<Quiz> quizzes = new LinkedHashSet<>();
 }

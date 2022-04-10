@@ -1,5 +1,6 @@
 package com.ercan.dtos;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AccessLevel;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
@@ -17,6 +18,7 @@ import java.util.Calendar;
 @RequiredArgsConstructor
 @MappedSuperclass
 @FieldDefaults(level = AccessLevel.PRIVATE)
+@JsonIgnoreProperties({"lastModifiedDate","lastModifiedBy"})
 public class BaseDto implements Serializable {
     Long id;
     Calendar createdDate;

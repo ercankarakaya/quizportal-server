@@ -1,4 +1,4 @@
-package com.ercan.response;
+package com.ercan.dtos.responses;
 
 import com.ercan.enums.ResponseStatusEnum;
 import lombok.AccessLevel;

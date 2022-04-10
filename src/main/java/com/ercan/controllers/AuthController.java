@@ -7,7 +7,7 @@ import com.ercan.dtos.requests.LoginRequest;
 import com.ercan.models.Role;
 import com.ercan.models.User;
 import com.ercan.models.UserRole;
-import com.ercan.response.Response;
+import com.ercan.dtos.responses.Response;
 import com.ercan.services.AuthService;
 import com.ercan.utils.constans.Mappings;
 import org.apache.logging.log4j.LogManager;
@@ -30,9 +30,9 @@ import static com.ercan.enums.ResponseStatusEnum.WARNING;
 import static com.ercan.utils.constans.DatabaseConstant.Roles.ROLE_USER;
 
 
-@CrossOrigin("*")
 @RestController
 @RequestMapping(Mappings.AUTH)
+@CrossOrigin("*")
 public class AuthController {
 
     private static final Logger logger = LogManager.getLogger(LoggingAspect.class);

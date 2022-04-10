@@ -1,11 +1,11 @@
 package com.ercan.controllers;
 
 import com.ercan.annotations.LogEntryExit;
+import com.ercan.dtos.responses.Response;
 import com.ercan.utils.constans.Mappings;
 import com.ercan.dtos.UserDto;
 import com.ercan.exceptions.UserNotFoundException;
 import com.ercan.models.*;
-import com.ercan.response.*;
 import com.ercan.services.*;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.*;
@@ -21,9 +21,9 @@ import java.util.stream.Collectors;
 import static com.ercan.utils.constans.DatabaseConstant.Roles.*;
 import static com.ercan.enums.ResponseStatusEnum.*;
 
-@CrossOrigin("*")
 @RestController
 @RequestMapping(Mappings.USER_PATH)
+@CrossOrigin("*")
 public class UserController {
 
     /**

@@ -17,6 +17,7 @@ import java.util.Set;
 @Table(name = "quizzes")
 @RequiredArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
+@Where(clause = "record_status=" + DatabaseConstant.RecordStatus.ACTIVE)
 public class Quiz extends BaseModel {
 
     String title;
@@ -31,7 +32,6 @@ public class Quiz extends BaseModel {
 
     @JsonIgnore
     @OneToMany(mappedBy = "quiz", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @Where(clause = "record_status=" + DatabaseConstant.RecordStatus.ACTIVE)
     Set<Question> questions = new HashSet<>();
 
     @Override
