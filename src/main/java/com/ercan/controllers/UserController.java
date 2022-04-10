@@ -98,15 +98,15 @@ public class UserController {
     }
 
     @PutMapping(Mappings.BY_ID)
-    public ResponseEntity<?> doIgnoreRecord(@PathVariable Long id) {
-        User user=userService.doIgnoreRecord(id);
+    public ResponseEntity<?> doIgnoreRecord(@PathVariable("id") Long userId) {
+        User user=userService.doIgnoreRecord(userId);
         return ResponseEntity.ok(modelMapper.map(user, UserDto.class));
     }
 
     @DeleteMapping(Mappings.BY_ID)
-    public ResponseEntity<?> deleteUser(@PathVariable Long id) {
-        User user = userService.getUserById(id).orElseThrow(() -> new UserNotFoundException());
-        userService.delete(id);
+    public ResponseEntity<?> deleteUser(@PathVariable("id") Long userId) {
+        User user = userService.getUserById(userId).orElseThrow(() -> new UserNotFoundException());
+        userService.delete(userId);
         return ResponseEntity.ok(modelMapper.map(user, UserDto.class));
     }
 

@@ -9,10 +9,12 @@ import org.hibernate.annotations.Where;
 import javax.persistence.*;
 import java.util.*;
 
-@Data
+@Getter
+@Setter
 @Entity
 @Table(name = "categories")
 @RequiredArgsConstructor
+@EqualsAndHashCode(of = "id")
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @Where(clause = "record_status="+DatabaseConstant.RecordStatus.ACTIVE)
 public class Category extends BaseModel {
@@ -20,7 +22,6 @@ public class Category extends BaseModel {
     String title;
     String description;
 
-    @JsonIgnore
     @OneToMany(mappedBy = "category", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     Set<Quiz> quizzes = new LinkedHashSet<>();
 }

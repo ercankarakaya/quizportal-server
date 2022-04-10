@@ -15,8 +15,8 @@ import java.io.Serializable;
 import java.util.Calendar;
 
 @Data
-@RequiredArgsConstructor
 @MappedSuperclass
+@RequiredArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @JsonIgnoreProperties({"lastModifiedDate","lastModifiedBy"})
 public class BaseDto implements Serializable {

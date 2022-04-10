@@ -4,13 +4,13 @@ import com.ercan.utils.constans.DatabaseConstant;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AccessLevel;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import org.hibernate.annotations.Where;
 
 import javax.persistence.*;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.List;
 
 @Data
 @Entity
@@ -30,13 +30,16 @@ public class Quiz extends BaseModel {
     @JoinColumn(name = "category_id")
     Category category;
 
-    @JsonIgnore
     @OneToMany(mappedBy = "quiz", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    Set<Question> questions = new HashSet<>();
+    List<Question> questions;
 
     @Override
     public void onCreate() {
         super.onCreate();
         setEnabled(DatabaseConstant.EnableStatus.PASSIVE);
+    }
+
+    public Quiz(Long id){
+        this.setId(id);
     }
 }

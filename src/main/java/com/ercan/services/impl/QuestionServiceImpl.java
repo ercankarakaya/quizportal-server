@@ -55,8 +55,8 @@ public class QuestionServiceImpl implements QuestionService {
 
     @Override
     public List<QuestionDto> getAllQuestionByQuiz(Long quizId) {
-        Quiz quiz = quizRepository.findById(quizId).orElseThrow(() -> new QuizNotFoundException());
-        return questionRepository.findAllByQuiz(quiz)
+        //Quiz quiz = quizRepository.findById(quizId).orElseThrow(() -> new QuizNotFoundException());
+        return questionRepository.findAllByQuiz(new Quiz(quizId))
                 .stream()
                 .map(item -> modelMapper.map(item, QuestionDto.class))
                 .collect(Collectors.toList());

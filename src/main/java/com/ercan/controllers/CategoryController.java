@@ -1,22 +1,19 @@
 package com.ercan.controllers;
 
 import com.ercan.dtos.CategoryDto;
-import com.ercan.enums.ResponseStatusEnum;
-import com.ercan.dtos.responses.Response;
 import com.ercan.services.CategoryService;
 import com.ercan.utils.constans.Mappings;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
 
 @RestController
 @RequestMapping(Mappings.CATEGORY_PATH)
 @CrossOrigin("*")
 public class CategoryController {
 
-    /**
-     * SERVICES
-     */
     @Autowired
     private CategoryService categoryService;
 
@@ -30,19 +27,20 @@ public class CategoryController {
         return ResponseEntity.ok(categoryService.update(categoryDto));
     }
 
+    @GetMapping(Mappings.BY_ID)
+    public ResponseEntity<?> getCategoryById(@PathVariable("id") Long categoryId) {
+        return ResponseEntity.ok(categoryService.getCategoryById(categoryId));
+    }
+
     @GetMapping(Mappings.ALL)
     public ResponseEntity<?> getAllCategories() {
         return ResponseEntity.ok(categoryService.getAllCategories());
     }
 
-    @GetMapping(Mappings.BY_ID)
-    public ResponseEntity<?> getCategoryById(@PathVariable Long id) {
-        return ResponseEntity.ok(categoryService.getCategoryById(id));
-    }
 
     @DeleteMapping(Mappings.BY_ID)
-    public ResponseEntity<?> deleteCategory(@PathVariable Long id) {
-        categoryService.deleteById(id);
-        return ResponseEntity.ok(new Response(id + " Deleted.", ResponseStatusEnum.SUCCESS, null));
+    public ResponseEntity<?> deleteCategory(@PathVariable("id") Long categoryId) {
+        categoryService.deleteById(categoryId);
+        return new ResponseEntity<>(categoryId+" record deleted.", HttpStatus.OK);
     }
 }
