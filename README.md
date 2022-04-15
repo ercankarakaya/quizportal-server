@@ -24,3 +24,4 @@ This project was generated with Spring Boot version 2.6.0.
 - Microservice
 - Mail Service
 - Video call
+- Controller Advice & Exception Handler
