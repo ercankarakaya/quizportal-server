@@ -1,4 +1,4 @@
-# quizportal-server
+# QuizPortalServer
 This is a quiz application.
 
 # Pre-requirements:
