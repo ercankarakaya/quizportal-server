@@ -14,4 +14,4 @@ This is a quiz application.
 - You should enable Lombok extension in your IDE.
 
 # To-Do:
-### Spring Boot password encryption with Jasypt in Application Properties.
+- Spring Boot password encryption with Jasypt in Application Properties.
