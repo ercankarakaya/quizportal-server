@@ -17,3 +17,7 @@ This is a quiz application.
 - Jasypt
 - Swagger
 - MapStruct
+- Docker
+- Microservice
+- Mail Service
+- Video call
