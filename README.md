@@ -13,5 +13,7 @@ This is a quiz application.
 
 - You should enable Lombok extension in your IDE.
 
-# To-Do:
-- Spring Boot password encryption with Jasypt in Application Properties.
+# Some technologies that will be used in the future:
+- Jasypt
+- Swagger
+- MapStruct
