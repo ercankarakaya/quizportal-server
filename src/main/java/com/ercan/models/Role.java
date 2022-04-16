@@ -1,6 +1,6 @@
 package com.ercan.models;
 
-import com.ercan.utils.constans.DatabaseConstant;
+import com.ercan.utils.constans.DatabaseConstants;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
@@ -21,7 +21,7 @@ public class Role extends BaseModel {
     String roleName;
     @JsonIgnore
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "role")
-    @Where(clause = "record_status="+ DatabaseConstant.RecordStatus.ACTIVE)
+    @Where(clause = "record_status="+ DatabaseConstants.RecordStatus.ACTIVE)
     Set<UserRole> userRoles = new HashSet<>();
 
 }

@@ -1,6 +1,6 @@
 package com.ercan.utils.constans;
 
-public class DatabaseConstant {
+public class DatabaseConstants {
 
     public static class Roles {
         public static final String ROLE_ADMIN = "ADMIN";

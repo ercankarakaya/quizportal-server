@@ -23,6 +23,12 @@ public class SecurityAuditorAware implements AuditorAware<String> {
      */
     @Override
     public Optional<String> getCurrentAuditor() {
+
+        return Optional.of(
+                Optional.ofNullable(SecurityUtil.getCurrentUser())
+                        .map(User::getUsername)
+                        .orElse(GlobalContants.SYSTEM_ACCOUNT));
+
         /*
         return Optional.of(SecurityContextHolder
                 .getContext()
@@ -30,6 +36,7 @@ public class SecurityAuditorAware implements AuditorAware<String> {
                 .getName());
          */
 
+   /*
         return Optional.of(Optional.ofNullable(SecurityContextHolder.getContext())
                 .map(SecurityContext::getAuthentication)
                 .filter(Authentication::isAuthenticated)
@@ -39,7 +46,8 @@ public class SecurityAuditorAware implements AuditorAware<String> {
                         return ((User) item).getUsername();
                     else
                         return ((String) item);//null
-                })).orElse(Optional.of(GlobalContants.SYSTEM_ACCOUNT));
+                })).get();
+   */
 
     }
 

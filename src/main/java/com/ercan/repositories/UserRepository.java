@@ -1,6 +1,6 @@
 package com.ercan.repositories;
 
-import com.ercan.utils.constans.DatabaseConstant;
+import com.ercan.utils.constans.DatabaseConstants;
 import com.ercan.models.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
@@ -19,12 +19,12 @@ public interface UserRepository extends JpaRepository<User, Long> {
     boolean existsUserByEmail(String email);
 
     @Modifying
-    @Query("update User u set u.enabled=" + DatabaseConstant.EnableStatus.PASSIVE +
+    @Query("update User u set u.enabled=" + DatabaseConstants.EnableStatus.PASSIVE +
             ", u.lastModifiedBy=?2,u.lastModifiedDate=?3 where u.id=?1")
     void deactivate(Long id, String modifiedByUser, Calendar modifiedDate);
 
     @Modifying
-    @Query("update User u set u.recordStatus=" + DatabaseConstant.RecordStatus.PASSIVE +
+    @Query("update User u set u.recordStatus=" + DatabaseConstants.RecordStatus.PASSIVE +
             ", u.lastModifiedBy=?2,u.lastModifiedDate=?3 where u.id=?1")
     void doIgnoreRecord(Long id, String modifiedByUser, Calendar modifiedDate);
 }

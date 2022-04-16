@@ -1,6 +1,6 @@
 package com.ercan.models;
 
-import com.ercan.utils.constans.DatabaseConstant;
+import com.ercan.utils.constans.DatabaseConstants;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 import org.hibernate.annotations.Where;
@@ -13,7 +13,7 @@ import javax.persistence.*;
 @Table(name = "questions")
 @RequiredArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
-@Where(clause = "record_status=" + DatabaseConstant.RecordStatus.ACTIVE)
+@Where(clause = "record_status=" + DatabaseConstants.RecordStatus.ACTIVE)
 public class Question extends BaseModel {
 
     String answer;

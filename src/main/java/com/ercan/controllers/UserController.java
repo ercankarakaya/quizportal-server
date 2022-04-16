@@ -18,7 +18,7 @@ import java.time.temporal.ChronoUnit;
 import java.util.*;
 import java.util.stream.Collectors;
 
-import static com.ercan.utils.constans.DatabaseConstant.Roles.*;
+import static com.ercan.utils.constans.DatabaseConstants.Roles.*;
 import static com.ercan.enums.ResponseStatusEnum.*;
 
 @RestController

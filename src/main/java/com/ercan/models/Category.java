@@ -1,7 +1,6 @@
 package com.ercan.models;
 
-import com.ercan.utils.constans.DatabaseConstant;
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.ercan.utils.constans.DatabaseConstants;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 import org.hibernate.annotations.Where;
@@ -16,7 +15,7 @@ import java.util.*;
 @RequiredArgsConstructor
 @EqualsAndHashCode(of = "id")
 @FieldDefaults(level = AccessLevel.PRIVATE)
-@Where(clause = "record_status="+DatabaseConstant.RecordStatus.ACTIVE)
+@Where(clause = "record_status="+ DatabaseConstants.RecordStatus.ACTIVE)
 public class Category extends BaseModel {
 
     String title;

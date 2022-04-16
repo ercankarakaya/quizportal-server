@@ -27,7 +27,7 @@ import java.util.Set;
 
 import static com.ercan.enums.ResponseStatusEnum.SUCCESS;
 import static com.ercan.enums.ResponseStatusEnum.WARNING;
-import static com.ercan.utils.constans.DatabaseConstant.Roles.ROLE_USER;
+import static com.ercan.utils.constans.DatabaseConstants.Roles.ROLE_USER;
 
 
 @RestController

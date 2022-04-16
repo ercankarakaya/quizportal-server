@@ -1,6 +1,6 @@
 package com.ercan.models;
 
-import com.ercan.utils.constans.DatabaseConstant;
+import com.ercan.utils.constans.DatabaseConstants;
 import com.ercan.security.Authority;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
@@ -10,7 +10,6 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
-import java.util.Calendar;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
@@ -36,14 +35,14 @@ public class User extends BaseModel implements UserDetails {
     // one user, many role
     @JsonIgnore
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "user")
-    @Where(clause = "record_status="+DatabaseConstant.RecordStatus.ACTIVE)
+    @Where(clause = "record_status="+ DatabaseConstants.RecordStatus.ACTIVE)
     Set<UserRole> userRoles = new HashSet<>();
 
 
     @Override
     public void onCreate() {
         super.onCreate();
-        setEnabled(DatabaseConstant.EnableStatus.ACTIVE);
+        setEnabled(DatabaseConstants.EnableStatus.ACTIVE);
     }
 
     @Override

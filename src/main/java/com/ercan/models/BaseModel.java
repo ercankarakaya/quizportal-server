@@ -1,10 +1,8 @@
 package com.ercan.models;
 
-import com.ercan.utils.constans.DatabaseConstant;
+import com.ercan.utils.constans.DatabaseConstants;
 import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import org.springframework.data.annotation.*;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
@@ -48,7 +46,7 @@ public class BaseModel implements Serializable {
 
     @PrePersist
     public void onCreate() {
-        setRecordStatus(DatabaseConstant.RecordStatus.ACTIVE);
+        setRecordStatus(DatabaseConstants.RecordStatus.ACTIVE);
         setId(generateUniqueId());
     }
 
