@@ -7,7 +7,7 @@ spring:
   datasource:
     driver-class-name: org.postgresql.Driver #oracle.jdbc.OracleDriver
     url: jdbc:postgresql://localhost:5432/QUIZ_PORTAL_TEST #jdbc:oracle:thin:@//localhost:1521
-    username: postgres #hr
+    username: ${PG_USERNAME} # hr -> for oracle db username
     password:
 
   #JPA Settings

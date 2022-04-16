@@ -33,7 +33,7 @@ public class AppConfig {
         Jackson2ObjectMapperBuilder builder = new Jackson2ObjectMapperBuilder();
         builder.featuresToDisable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS); // for json date
         builder.dateFormat(new SimpleDateFormat(TimeUtils.DATEFORMAT.YYYY_MM_DD_HH_MM_SS));
-       // builder.featuresToEnable(SerializationFeature.WRAP_ROOT_VALUE); // enables wrapping for root elements
+        //builder.featuresToEnable(SerializationFeature.WRAP_ROOT_VALUE); // enables wrapping for root elements
         //builder.serializationInclusion(JsonInclude.Include.NON_NULL);
         return builder;
     }
