@@ -1,6 +1,8 @@
 package com.ercan.configurations;
 
 import com.ercan.models.User;
+import com.ercan.utils.SecurityUtil;
+import com.ercan.utils.constans.GlobalContants;
 import org.springframework.data.domain.AuditorAware;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContext;
@@ -21,10 +23,12 @@ public class SecurityAuditorAware implements AuditorAware<String> {
      */
     @Override
     public Optional<String> getCurrentAuditor() {
-//        return Optional.of(SecurityContextHolder
-//                .getContext()
-//                .getAuthentication()
-//                .getName());
+        /*
+        return Optional.of(SecurityContextHolder
+                .getContext()
+                .getAuthentication()
+                .getName());
+         */
 
         return Optional.of(Optional.ofNullable(SecurityContextHolder.getContext())
                 .map(SecurityContext::getAuthentication)
@@ -35,7 +39,8 @@ public class SecurityAuditorAware implements AuditorAware<String> {
                         return ((User) item).getUsername();
                     else
                         return ((String) item);//null
-                })).get();
+                })).orElse(Optional.of(GlobalContants.SYSTEM_ACCOUNT));
+
     }
 
 }

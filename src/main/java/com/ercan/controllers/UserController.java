@@ -23,7 +23,6 @@ import static com.ercan.enums.ResponseStatusEnum.*;
 
 @RestController
 @RequestMapping(Mappings.USER_PATH)
-@CrossOrigin("*")
 public class UserController {
 
     /**

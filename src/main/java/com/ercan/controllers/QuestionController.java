@@ -20,7 +20,6 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping(Mappings.QUESTION_PATH)
-@CrossOrigin("*")
 public class QuestionController {
 
     @Autowired

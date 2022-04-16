@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping(Mappings.CATEGORY_PATH)
-@CrossOrigin("*")
 public class CategoryController {
 
     @Autowired

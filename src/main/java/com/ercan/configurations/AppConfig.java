@@ -23,6 +23,7 @@ public class AppConfig {
      * Alternative -> spring.jackson.serialization.wrap-root-value=true  (application.properties)
      * @return
      */
+    /*
     @Bean
     public Jackson2ObjectMapperBuilder jacksonBuilder() {
         Jackson2ObjectMapperBuilder builder = new Jackson2ObjectMapperBuilder();
@@ -30,6 +31,6 @@ public class AppConfig {
         //builder.serializationInclusion(JsonInclude.Include.NON_NULL);
         return builder;
     }
-
+*/
 
 }

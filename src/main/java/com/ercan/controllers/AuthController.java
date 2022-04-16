@@ -32,7 +32,6 @@ import static com.ercan.utils.constans.DatabaseConstant.Roles.ROLE_USER;
 
 @RestController
 @RequestMapping(Mappings.AUTH)
-@CrossOrigin("*")
 public class AuthController {
 
     private static final Logger logger = LogManager.getLogger(LoggingAspect.class);

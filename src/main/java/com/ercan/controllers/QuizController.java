@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping(Mappings.QUIZ_PATH)
-@CrossOrigin("*")
 public class QuizController {
 
     @Autowired
