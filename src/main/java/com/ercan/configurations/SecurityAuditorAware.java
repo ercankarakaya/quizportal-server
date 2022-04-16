@@ -1,13 +1,9 @@
 package com.ercan.configurations;
 
 import com.ercan.models.User;
-import com.ercan.utils.SecurityUtil;
+import com.ercan.utils.SecurityUtils;
 import com.ercan.utils.constans.GlobalContants;
 import org.springframework.data.domain.AuditorAware;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContext;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 
 import java.util.Optional;
@@ -25,7 +21,7 @@ public class SecurityAuditorAware implements AuditorAware<String> {
     public Optional<String> getCurrentAuditor() {
 
         return Optional.of(
-                Optional.ofNullable(SecurityUtil.getCurrentUser())
+                Optional.ofNullable(SecurityUtils.getCurrentUser())
                         .map(User::getUsername)
                         .orElse(GlobalContants.SYSTEM_ACCOUNT));
 

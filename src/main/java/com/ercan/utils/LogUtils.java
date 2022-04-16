@@ -8,7 +8,7 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.StringJoiner;
 
-public class LogUtil {
+public class LogUtils {
 
     public static void log(Logger logger, LogLevel level, String message) {
         switch (level) {

@@ -1,7 +1,7 @@
 package com.ercan.aspects;
 
 import com.ercan.annotations.LogEntryExit;
-import com.ercan.utils.LogUtil;
+import com.ercan.utils.LogUtils;
 import org.apache.logging.log4j.*;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
@@ -108,14 +108,14 @@ public class LoggingAspect {
             Object[] methodArgs = joinPoint.getArgs();
             String[] methodParams = codeSignature.getParameterNames();
 
-            LogUtil.log(logger, level, LogUtil.entry(methodName, showArgs, methodParams, methodArgs));
+            LogUtils.log(logger, level, LogUtils.entry(methodName, showArgs, methodParams, methodArgs));
 
             var start = Instant.now();
             var response = joinPoint.proceed();
             var end = Instant.now();
             var duration = String.format("%s %s", unit.between(start, end), unit.name().toLowerCase());
 
-            LogUtil.log(logger, level, LogUtil.exit(methodName, duration, response, showResult, showExecutionTime));
+            LogUtils.log(logger, level, LogUtils.exit(methodName, duration, response, showResult, showExecutionTime));
 
             return response;
         } catch (Exception e) {

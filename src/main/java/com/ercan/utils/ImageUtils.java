@@ -6,7 +6,7 @@ import java.io.*;
 import java.util.Base64;
 
 @Slf4j
-public class ImageUtil {
+public class ImageUtils {
     public static String ConvertImageFileToBase64String(String imagePath) throws IOException {
         String base64Image = "";
         File file = new File(imagePath);

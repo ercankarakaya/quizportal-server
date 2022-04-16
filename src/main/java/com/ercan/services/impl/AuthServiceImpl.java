@@ -12,7 +12,7 @@ import com.ercan.repositories.UserRepository;
 import com.ercan.security.jwt.JwtUtil;
 import com.ercan.services.AuthService;
 import com.ercan.services.RoleService;
-import com.ercan.utils.SecurityUtil;
+import com.ercan.utils.SecurityUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -79,7 +79,7 @@ public class AuthServiceImpl implements AuthService {
 
     @Override
     public User getCurrentUser() {
-        return SecurityUtil.getCurrentUser();
+        return SecurityUtils.getCurrentUser();
     }
 
     @Override
