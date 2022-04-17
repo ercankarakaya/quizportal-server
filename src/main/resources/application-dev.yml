@@ -15,8 +15,15 @@ spring:
     properties:
       hibernate.enable_lazy_load_no_trans: true
     database: postgresql
-    database-platform:  org.hibernate.dialect.PostgreSQL94Dialect
+    database-platform: org.hibernate.dialect.PostgreSQL94Dialect
     hibernate:
-      ddl-auto: update
+      ddl-auto: none
     show-sql: false
 
+  #Liquibase Config
+  liquibase:
+    contexts: dev
+    enabled: true
+    drop-first: false
+    clear-checksums: true
+    change-log: classpath:db/changelog/changelog-master.xml
