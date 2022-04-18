@@ -8,8 +8,7 @@ import org.hibernate.annotations.Where;
 import javax.persistence.*;
 import java.util.*;
 
-@Getter
-@Setter
+@Data
 @Entity
 @Table(name = "categories")
 @RequiredArgsConstructor

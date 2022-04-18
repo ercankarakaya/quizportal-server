@@ -1,6 +1,5 @@
 package com.ercan.dtos;
 
-import com.fasterxml.jackson.annotation.JsonRootName;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 

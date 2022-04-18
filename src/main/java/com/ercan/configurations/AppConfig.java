@@ -1,10 +1,7 @@
 package com.ercan.configurations;
 
-import ch.qos.logback.core.util.TimeUtil;
 import com.ercan.utils.TimeUtils;
-import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.databind.SerializationFeature;
-import org.apache.commons.lang3.time.DateFormatUtils;
 import org.modelmapper.ModelMapper;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

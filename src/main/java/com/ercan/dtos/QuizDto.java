@@ -8,8 +8,7 @@ import lombok.experimental.FieldDefaults;
 
 import java.util.*;
 
-@Getter
-@Setter
+@Data
 @RequiredArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class QuizDto extends BaseDto{

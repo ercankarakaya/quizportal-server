@@ -42,21 +42,29 @@ public class LoggingAspect {
 
 
     @Pointcut("within(com.ercan.controllers..*)")
-    public void controllersPointcut() {throw new UnsupportedOperationException();
+    public void controllersPointcut() {
+        throw new UnsupportedOperationException();
     }
 
     @Pointcut("@annotation(com.ercan.annotations.LogEntryExit)")
-    public void logEntryExitPointcut() {throw new UnsupportedOperationException();}
+    public void logEntryExitPointcut() {
+        throw new UnsupportedOperationException();
+    }
 
 
     @Around("controllersPointcut() && !logEntryExitPointcut()")
     public Object logAllMethod(ProceedingJoinPoint joinPoint) throws Throwable {
         final String joinPoints = Arrays.toString(joinPoint.getArgs());
         if (joinPoints != null) {
-            logger.info("Enter : {}.{}() with arguments[s] = {} ",
+            logger.info("Enter : {}.{}()",
                     joinPoint.getSignature().getDeclaringTypeName(),
-                    joinPoint.getSignature().getName(),
-                    Arrays.toString(joinPoint.getArgs()));
+                    joinPoint.getSignature().getName());
+            /**
+             logger.info("Enter : {}.{}() with arguments[s] = {} ",
+             joinPoint.getSignature().getDeclaringTypeName(),
+             joinPoint.getSignature().getName(),
+             Arrays.toString(joinPoint.getArgs()));
+             */
         }
         try {
             final StopWatch stopWatch = new StopWatch();
@@ -125,7 +133,7 @@ public class LoggingAspect {
 
     @AfterThrowing(value = "applicationPackagePointcut()", throwing = "ex")
     public void logAfterThrowing(JoinPoint joinPoint, Throwable ex) {
-        logger.error("EXCEPTION : "+ ex);
+        logger.error("EXCEPTION : " + ex);
     }
 
 }
