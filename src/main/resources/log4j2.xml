@@ -3,9 +3,9 @@
     <properties>
         <property name="LOG_HOME">logs</property>
         <property name="FILE_NAME">application</property>
-        <property name="log.sql.level">info</property>
         <property name="LOG_PATTERN_CONSOLE">%clr{%d{yyyy-MM-dd HH:mm:ss.SSS}}{blue} %clr{%5p} %clr{${sys:PID}}{magenta} %clr{---}{faint} %clr{[%15.15t]}{faint} %clr{%-40.40c{1.}}{cyan} %clr{:}{faint} %m%n%xwEx</property>
         <property name="LOG_PATTERN_FILE">%d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %-5level [%t] %c{1} - %msg%n</property>
+        <!--<property name="log.sql.level">info</property>-->
     </properties>
 
     <Appenders>

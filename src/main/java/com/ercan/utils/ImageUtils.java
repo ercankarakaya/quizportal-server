@@ -1,12 +1,17 @@
 package com.ercan.utils;
 
-import lombok.extern.slf4j.Slf4j;
+import org.apache.logging.log4j.*;
 
 import java.io.*;
 import java.util.Base64;
 
-@Slf4j
 public class ImageUtils {
+
+    private static final Logger log = LogManager.getLogger(ImageUtils.class);
+
+    private ImageUtils(){throw new IllegalAccessError("ImageUtils");}
+
+
     public static String ConvertImageFileToBase64String(String imagePath) throws IOException {
         String base64Image = "";
         File file = new File(imagePath);

@@ -74,9 +74,15 @@ public class LoggingAspect {
             Object result = joinPoint.proceed();
             stopWatch.stop();
 
+            logger.info("Exit : {}.{}()",
+                    joinPoint.getSignature().getDeclaringTypeName(),
+                    joinPoint.getSignature().getName());
+
+            /**
             logger.info("Exit : {}.{}() with result = {}",
                     joinPoint.getSignature().getDeclaringTypeName(),
                     joinPoint.getSignature().getName(), result);
+             */
 
             //Log method execution time
             //logger.info("Total process time :: {}", stopWatch.getTotalTimeMillis() + " ms");

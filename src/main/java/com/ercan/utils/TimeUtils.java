@@ -1,9 +1,18 @@
 package com.ercan.utils;
 
 
+import java.util.Calendar;
+import java.util.Date;
+
 public class TimeUtils {
 
+    private TimeUtils(){throw new IllegalAccessError("TimeUtils");}
+
+
     public static class DATEFORMAT {
+
+        private DATEFORMAT(){throw new IllegalAccessError("TimeUtils.DATEFORMAT");}
+
         public static final String YYYY_MM_DD = "yyyy-MM-dd";
         public static final String YYYY_MM_DD_HH = "yyyy-MM-dd HH";
         public static final String YYYY_MM_DD_HH_MM = "yyyy-MM-dd HH:mm";
@@ -21,4 +30,13 @@ public class TimeUtils {
         public static final String ISO_8601_EXTENDED_DATETIME_FORMAT = "yyyy-MM-dd'T'HH:mm:ss";
         public static final String ISO_8601_EXTENDED_DATETIME_TIME_ZONE_FORMAT = "yyyy-MM-dd'T'HH:mm:ssZZ";
     }
+
+    /* get 24 hour ago time */
+    public static Long get24HoursAgoTime(){
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(new Date());
+        cal.add(Calendar.HOUR, -24);
+        return cal.getTimeInMillis();
+    }
+
 }

@@ -10,6 +10,8 @@ import java.util.StringJoiner;
 
 public class LogUtils {
 
+    private LogUtils(){throw new IllegalAccessError("LogUtils");}
+
     public static void log(Logger logger, LogLevel level, String message) {
         switch (level) {
             case DEBUG:
