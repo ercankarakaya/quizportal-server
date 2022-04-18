@@ -8,7 +8,7 @@ import java.util.*;
 
 @Data
 @RequiredArgsConstructor
-@EqualsAndHashCode
+@EqualsAndHashCode(of = "id")
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class CategoryDto extends BaseDto{
     String title;
