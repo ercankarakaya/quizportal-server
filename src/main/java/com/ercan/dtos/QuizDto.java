@@ -11,7 +11,6 @@ import java.util.*;
 @Getter
 @Setter
 @RequiredArgsConstructor
-@JsonRootName(value = "Quiz")
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class QuizDto extends BaseDto{
     String title;
@@ -19,7 +18,7 @@ public class QuizDto extends BaseDto{
     String maxMarks;
     String numberOfQuestions;
     Integer enabled;
-    @JsonProperty(value = "Category")
+    //@JsonProperty(value = "Category")
     CategoryDto category;
     @JsonIgnore
    List<QuestionDto> questions;

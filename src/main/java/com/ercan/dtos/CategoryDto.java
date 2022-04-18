@@ -9,7 +9,6 @@ import java.util.*;
 @Data
 @RequiredArgsConstructor
 @EqualsAndHashCode
-@JsonRootName(value = "Category")
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class CategoryDto extends BaseDto{
     String title;

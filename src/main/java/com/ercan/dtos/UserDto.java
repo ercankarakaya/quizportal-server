@@ -1,6 +1,5 @@
 package com.ercan.dtos;
 
-import com.fasterxml.jackson.annotation.JsonRootName;
 import lombok.AccessLevel;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
@@ -11,7 +10,6 @@ import java.util.List;
 
 @Data
 @RequiredArgsConstructor
-@JsonRootName(value = "User")
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class UserDto extends BaseDto {
     String username;
