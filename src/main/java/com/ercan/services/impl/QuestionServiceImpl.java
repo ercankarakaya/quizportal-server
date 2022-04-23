@@ -15,6 +15,8 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static com.ercan.utils.constans.DatabaseConstants.RecordStatus.ACTIVE;
+
 @Service
 public class QuestionServiceImpl implements QuestionService {
 
@@ -42,6 +44,7 @@ public class QuestionServiceImpl implements QuestionService {
     public List<QuestionDto> getAllQuestions() {
         return questionRepository.findAll()
                 .stream()
+                .filter(item->item.getRecordStatus()== ACTIVE)
                 .map(item -> modelMapper.map(item, QuestionDto.class))
                 .collect(Collectors.toList());
     }

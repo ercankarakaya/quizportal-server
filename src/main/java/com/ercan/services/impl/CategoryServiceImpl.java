@@ -5,12 +5,16 @@ import com.ercan.exceptions.CategoryNotFoundException;
 import com.ercan.models.Category;
 import com.ercan.repositories.CategoryRepository;
 import com.ercan.services.CategoryService;
+import com.ercan.utils.constans.DatabaseConstants;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
+
+import static com.ercan.utils.constans.DatabaseConstants.RecordStatus.ACTIVE;
 
 @Service
 public class CategoryServiceImpl implements CategoryService {
@@ -34,11 +38,11 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
-    public Set<CategoryDto> getAllCategories() {
+    public List<CategoryDto> getAllCategories() {
         return categoryRepository.findAll()
                 .stream()
                 .map(item -> modelMapper.map(item, CategoryDto.class))
-                .collect(Collectors.toSet());
+                .collect(Collectors.toList());
     }
 
     @Override

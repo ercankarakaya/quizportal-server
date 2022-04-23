@@ -14,12 +14,12 @@ import java.util.*;
 @RequiredArgsConstructor
 @EqualsAndHashCode(of = "id")
 @FieldDefaults(level = AccessLevel.PRIVATE)
-@Where(clause = "record_status="+ DatabaseConstants.RecordStatus.ACTIVE)
 public class Category extends BaseModel {
 
     String title;
     String description;
 
     @OneToMany(mappedBy = "category", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @Where(clause = "record_status="+ DatabaseConstants.RecordStatus.ACTIVE)
     Set<Quiz> quizzes = new LinkedHashSet<>();
 }

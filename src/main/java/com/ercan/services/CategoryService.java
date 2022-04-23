@@ -2,6 +2,7 @@ package com.ercan.services;
 
 import com.ercan.dtos.CategoryDto;
 
+import java.util.List;
 import java.util.Set;
 
 public interface CategoryService {
@@ -9,7 +10,7 @@ public interface CategoryService {
 
     CategoryDto update(CategoryDto categoryDto);
 
-    Set<CategoryDto> getAllCategories();
+    List<CategoryDto> getAllCategories();
 
     CategoryDto getCategoryById(Long categoryId);
 

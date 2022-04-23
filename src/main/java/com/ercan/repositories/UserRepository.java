@@ -19,12 +19,12 @@ public interface UserRepository extends JpaRepository<User, Long> {
     boolean existsUserByEmail(String email);
 
     @Modifying
-    @Query("update User u set u.enabled=" + DatabaseConstants.EnableStatus.PASSIVE +
-            ", u.lastModifiedBy=?2,u.lastModifiedDate=?3 where u.id=?1")
+    @Query("Update User u Set u.enabled=" + DatabaseConstants.EnableStatus.PASSIVE +
+            ", u.lastModifiedBy=?2,u.lastModifiedDate=?3 Where u.id=?1")
     void deactivate(Long id, String modifiedByUser, Calendar modifiedDate);
 
     @Modifying
-    @Query("update User u set u.recordStatus=" + DatabaseConstants.RecordStatus.PASSIVE +
-            ", u.lastModifiedBy=?2,u.lastModifiedDate=?3 where u.id=?1")
+    @Query("Update User u Set u.recordStatus=" + DatabaseConstants.RecordStatus.PASSIVE +
+            ", u.lastModifiedBy=?2,u.lastModifiedDate=?3 Where u.id=?1")
     void doIgnoreRecord(Long id, String modifiedByUser, Calendar modifiedDate);
 }

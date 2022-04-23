@@ -13,6 +13,8 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import static com.ercan.utils.constans.DatabaseConstants.RecordStatus.ACTIVE;
+
 
 @Service
 public class QuizServiceImpl implements QuizService {

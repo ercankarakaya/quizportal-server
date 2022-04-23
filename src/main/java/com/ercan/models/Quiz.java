@@ -13,7 +13,6 @@ import java.util.List;
 @Table(name = "quizzes")
 @RequiredArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
-@Where(clause = "record_status=" + DatabaseConstants.RecordStatus.ACTIVE)
 public class Quiz extends BaseModel {
 
     String title;
@@ -27,6 +26,7 @@ public class Quiz extends BaseModel {
     Category category;
 
     @OneToMany(mappedBy = "quiz", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @Where(clause = "record_status=" + DatabaseConstants.RecordStatus.ACTIVE)
     List<Question> questions;
 
     @Override
