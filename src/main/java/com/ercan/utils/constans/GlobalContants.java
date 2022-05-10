@@ -6,7 +6,11 @@ public class GlobalContants {
         throw new IllegalAccessError("GlobalContants");
     }
 
+    /* Default system user account*/
     public static final String SYSTEM_ACCOUNT = "system";
+
+    /* Jwt Token Expiry Time */
+    public static final Long EXPIRATION_MILLIS = 360000L;
 
     /* YES or NO */
     public static final int NO = 0;

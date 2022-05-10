@@ -12,5 +12,7 @@ import lombok.NoArgsConstructor;
 public class LoginResponse {
     String token;
     String username;
-    String authType="Bearer";
+    String authType = "Bearer";
+    Long tokenExpiryTime;
+
 }

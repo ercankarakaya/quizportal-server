@@ -29,11 +29,6 @@ public class Quiz extends BaseModel {
     @Where(clause = "record_status=" + DatabaseConstants.RecordStatus.ACTIVE)
     List<Question> questions;
 
-    @Override
-    public void onCreate() {
-        super.onCreate();
-        setEnabled(DatabaseConstants.EnableStatus.PASSIVE);
-    }
 
     public Quiz(Long id){
         this.setId(id);

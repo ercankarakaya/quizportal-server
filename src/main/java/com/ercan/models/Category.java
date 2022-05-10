@@ -19,7 +19,7 @@ public class Category extends BaseModel {
     String title;
     String description;
 
-    @OneToMany(mappedBy = "category", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "category", fetch = FetchType.EAGER)
     @Where(clause = "record_status="+ DatabaseConstants.RecordStatus.ACTIVE)
     Set<Quiz> quizzes = new LinkedHashSet<>();
 }

@@ -13,6 +13,7 @@ import com.ercan.security.jwt.JwtUtil;
 import com.ercan.services.AuthService;
 import com.ercan.services.RoleService;
 import com.ercan.utils.SecurityUtils;
+import com.ercan.utils.constans.GlobalContants;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,8 +50,9 @@ public class AuthServiceImpl implements AuthService {
 
             return LoginResponse.builder()
                     .token(token)
-                    .username(loginRequest.getUsername())
                     .authType("Bearer")
+                    .username(loginRequest.getUsername())
+                    .tokenExpiryTime(GlobalContants.EXPIRATION_MILLIS)
                     .build();
 
         } catch (UserNotFoundException e) {

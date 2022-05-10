@@ -26,6 +26,7 @@ public class BaseModel implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     Long id;
 
     @CreatedDate
@@ -47,7 +48,7 @@ public class BaseModel implements Serializable {
     @PrePersist
     public void onCreate() {
         setRecordStatus(DatabaseConstants.RecordStatus.ACTIVE);
-        setId(generateUniqueId());
+        //setId(generateUniqueId());
     }
 
     public Long generateUniqueId() {
@@ -59,7 +60,7 @@ public class BaseModel implements Serializable {
     }
 
     public Long generateUniqueId2() {
-        return (long)(Math.random()*Long.MAX_VALUE);
+        return (long) (Math.random() * Long.MAX_VALUE);
     }
 
     public Long generateUniqueId3() {
