@@ -16,6 +16,7 @@ import java.util.List;
 public class Quiz extends BaseModel {
 
     String title;
+    @Column(length = 5000)
     String description;
     String maxMarks;
     String numberOfQuestions;
