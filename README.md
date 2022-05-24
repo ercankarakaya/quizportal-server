@@ -20,7 +20,6 @@ This project was generated with Spring Boot version 2.6.0.
 
 # Some technologies that will be used in the future:
 - Jasypt
-- Swagger
 - MapStruct
 - Docker
 - Microservice
