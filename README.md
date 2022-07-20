@@ -1,7 +1,6 @@
 # QuizPortalServer
 
 This is a quiz application.
-
 This project was generated with Spring Boot version 2.6.0.
 
 # Pre-requirements:
