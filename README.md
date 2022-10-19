@@ -26,3 +26,4 @@ This project was generated with Spring Boot version 2.6.0
 - Mail Service
 - Video call
 - Rest Controller Advice & Exception Handler
+
