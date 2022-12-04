@@ -2,7 +2,7 @@
 
 This is a quiz application.
 
-This project was generated with Spring Boot version 2.6.0.
+This project was generated with Spring Boot version 2.6.0
 
 # Pre-requirements:
 
@@ -20,10 +20,10 @@ This project was generated with Spring Boot version 2.6.0.
 
 # Some technologies that will be used in the future:
 - Jasypt
-- Swagger
 - MapStruct
 - Docker
 - Microservice
 - Mail Service
 - Video call
 - Rest Controller Advice & Exception Handler
+
