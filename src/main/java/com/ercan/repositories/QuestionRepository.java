@@ -10,6 +10,6 @@ import java.util.List;
 
 public interface QuestionRepository extends JpaRepository<Question, Long> {
 
-    @Query("Select q From Question q Where q.quiz=?1 And q.recordStatus=" + DatabaseConstants.RecordStatus.ACTIVE)
+    @Query("Select q From Question q Where q.quiz=?1 And q.recordStatus=" + DatabaseConstants.RecordStatus.ACTIVE+" Order By q.createdDate ASC")
     List<Question> findAllByQuiz(Quiz quiz);
 }
