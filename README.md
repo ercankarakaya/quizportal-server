@@ -17,7 +17,7 @@ This project was generated with Spring Boot version 2.6.0
 - You should enable Lombok extension in your IDE.
 
 ### Liquibase | Open Source Version Control for Database Changes
-### Log4j
+### Log4j2
 
 # Some technologies that will be used in the future:
 - Jasypt
