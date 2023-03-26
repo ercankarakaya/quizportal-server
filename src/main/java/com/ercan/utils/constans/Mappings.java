@@ -19,5 +19,7 @@ public class Mappings {
     public static final String BY_QUIZ_ID = "/by-quiz/{quizId}";
     public static final String QUESTION_PATH = BASE_PATH + "/question";
     public static final String BY_QUESTION_ID = "/by-question/{questionId}";
-
+    public static final String BY_USER_ID_IMAGE_UPLOAD = "/image/upload/{userId}";
+    public static final String BY_USER_ID_IMAGE_DOWNLOAD = "/{userId}/image/download";
+    public static final String GET_IMAGE_BY_USER_PROFILE_NAME = "/get/image/{userProfileImageName}";
 }
