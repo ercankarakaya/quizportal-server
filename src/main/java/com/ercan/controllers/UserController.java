@@ -12,8 +12,10 @@ import org.springframework.beans.factory.annotation.*;
 import org.springframework.http.*;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.io.IOException;
 import java.time.temporal.ChronoUnit;
 import java.util.*;
 import java.util.stream.Collectors;
@@ -35,6 +37,8 @@ public class UserController {
      **/
     @Autowired
     private UserService userService;
+    @Autowired
+    private UserProfileService userProfileService;
     @Autowired
     private RoleService roleService;
     @Autowired
@@ -109,5 +113,26 @@ public class UserController {
         return ResponseEntity.ok(modelMapper.map(user, UserDto.class));
     }
 
+    @PostMapping(
+            path=Mappings.BY_USER_ID_IMAGE_UPLOAD,
+            consumes = MediaType.MULTIPART_FORM_DATA_VALUE,
+            produces = MediaType.APPLICATION_JSON_VALUE
+    )
+    public void uploadUserProfileImage(@PathVariable("userId") Long userId, @RequestParam("file") MultipartFile file){
+        userProfileService.uploadUserProfileImage(2539544652876695818L,file);
+    }
+
+    @GetMapping(Mappings.BY_USER_ID_IMAGE_DOWNLOAD)
+    public byte[] downloadUserProfileImage(@PathVariable("userId") Long userId){
+        return userProfileService.downloadUserProfileImage(userId);
+    }
+
+    @GetMapping(Mappings.GET_IMAGE_BY_USER_PROFILE_NAME)
+    public ResponseEntity<byte[]> getImage(@PathVariable("userProfileImageName") String userProfileImageName) throws IOException {
+
+        byte[] content = userProfileService.getImage(userProfileImageName);
+
+        return ResponseEntity.ok(content);
+    }
 
 }

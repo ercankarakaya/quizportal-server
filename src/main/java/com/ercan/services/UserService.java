@@ -10,6 +10,8 @@ import java.util.Set;
 public interface UserService {
     User save(User user, Set<UserRole> userRoles) throws Exception;
 
+    User update(User user);
+
     User getUserByUsername(String username);
 
     Optional<User> getUserById(Long id);
