@@ -1,7 +1,10 @@
 package com.ercan.controllers;
 
 import com.ercan.annotations.LogEntryExit;
+import com.ercan.dtos.responses.FileResponse;
 import com.ercan.dtos.responses.Response;
+import com.ercan.utils.GlobalUtils;
+import com.ercan.utils.ImageUtils;
 import com.ercan.utils.constans.Mappings;
 import com.ercan.dtos.UserDto;
 import com.ercan.exceptions.UserNotFoundException;
@@ -12,8 +15,11 @@ import org.springframework.beans.factory.annotation.*;
 import org.springframework.http.*;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.time.temporal.ChronoUnit;
 import java.util.*;
 import java.util.stream.Collectors;
@@ -37,6 +43,8 @@ public class UserController {
     private UserService userService;
     @Autowired
     private RoleService roleService;
+    @Autowired
+    private FileStoreService fileStoreService;
     @Autowired
     private PasswordEncoder passwordEncoder;
 
@@ -109,5 +117,45 @@ public class UserController {
         return ResponseEntity.ok(modelMapper.map(user, UserDto.class));
     }
 
+    @PostMapping(Mappings.IMAGE_UPLOAD_BY_USER_ID)
+    public ResponseEntity<?> profileImgUpload(@PathVariable("userId") Long userId,@RequestParam("image") MultipartFile file) throws IOException {
+        User user = userService.uploadProfileImage(userId,file);
+        Response response = new Response("Uploaded the file successfully..",SUCCESS,user.getProfile());
+        return ResponseEntity.ok(response);
+    }
+
+    @GetMapping(Mappings.IMAGE_INFO_BY_USER_ID)
+    public ResponseEntity<?> getProfileImage(@PathVariable("userId") Long userId) throws FileNotFoundException {
+//        User user = userService.getUserById(userId).get();
+//        FileResponse response = userService.getProfileImageInfoByFileName(user.getId());
+//        return ResponseEntity.ok(response);
+        FileResponse response = userService.getProfileImageInfoByFileName(userId);
+        //byte[] data = userService.getProfileImage(response.getName());
+
+        if (response == null) {
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity
+                .ok()
+                .contentType(MediaType.valueOf(response.getType()))
+                .body(Base64.getEncoder().encodeToString(ImageUtils.decompressImage(response.getData())));
+    }
+
+    @GetMapping(Mappings.IMAGE_VIEW_BY_ID)
+    public ResponseEntity<byte[]> getFile(@PathVariable("userId") Long userId,
+                                          @PathVariable("imageId") Long imageId) throws FileNotFoundException {
+
+        FileResponse response = userService.getProfileImageInfoByFileName(userId);
+        byte[] data = userService.getProfileImage(response.getName());
+
+        if (response==null) {
+            return ResponseEntity.notFound()
+                    .build();
+        }
+        return ResponseEntity.ok()
+                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + response.getName() + "\"")
+                .contentType(MediaType.valueOf(response.getType()))
+                .body(data);
+    }
 
 }

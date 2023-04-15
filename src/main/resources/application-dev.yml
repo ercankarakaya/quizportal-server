@@ -17,13 +17,13 @@ spring:
     database: postgresql
     database-platform: org.hibernate.dialect.PostgreSQL94Dialect
     hibernate:
-      ddl-auto: none
+      ddl-auto: update
     show-sql: false
 
   #Liquibase Config
   liquibase:
     contexts: dev
-    enabled: true
+    enabled: false #we ignore it for dev.
     drop-first: false
     clear-checksums: true
     change-log: classpath:db/changelog/changelog-master.xml

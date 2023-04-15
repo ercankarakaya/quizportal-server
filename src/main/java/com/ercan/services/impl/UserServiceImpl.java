@@ -1,20 +1,28 @@
 package com.ercan.services.impl;
 
 
+import com.ercan.dtos.responses.FileResponse;
 import com.ercan.exceptions.UserAlreadyExistException;
 import com.ercan.exceptions.UserNotFoundException;
+import com.ercan.models.FileModel;
 import com.ercan.models.Role;
 import com.ercan.models.User;
 import com.ercan.models.UserRole;
 import com.ercan.repositories.UserRepository;
+import com.ercan.services.FileStoreService;
 import com.ercan.services.RoleService;
 import com.ercan.services.UserService;
 import com.ercan.utils.constans.DatabaseConstants;
+import com.ercan.utils.constans.Mappings;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
@@ -27,6 +35,8 @@ public class UserServiceImpl implements UserService {
     private UserRepository userRepository;
     @Autowired
     private RoleService roleService;
+    @Autowired
+    private FileStoreService fileStoreService;
 
     @Override
     public User save(User user, Set<UserRole> userRoles) throws Exception {
@@ -49,6 +59,11 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public User update(User user) {
+        return userRepository.save(user);
+    }
+
+    @Override
     public List<User> getAll() {
         return userRepository.findAll();
     }
@@ -62,7 +77,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public Optional<User> getUserById(Long id) {
-        return userRepository.findById(id);
+        return Optional.ofNullable(userRepository.findById(id).orElseThrow(() -> new UserNotFoundException()));
     }
 
     @Override
@@ -92,6 +107,40 @@ public class UserServiceImpl implements UserService {
         User user = userRepository.findById(id).orElseThrow(() -> new UserNotFoundException());
         user.setRecordStatus(DatabaseConstants.RecordStatus.PASSIVE);
         return userRepository.save(user);
+    }
+
+    @Override
+    public User uploadProfileImage(Long id, MultipartFile file) throws IOException {
+        User user = getUserById(id).get();
+        FileModel fileModel = fileStoreService.store(file);
+        user.setProfile(fileModel.getName());
+        return update(user);
+    }
+
+    @Override
+    public FileResponse getProfileImageInfoByFileName(Long userId) throws FileNotFoundException {
+        User user = getUserById(userId).get();
+        FileModel fileModel = fileStoreService.getFileByName(user.getProfile());
+
+        String url = ServletUriComponentsBuilder.fromCurrentContextPath()
+                .path(Mappings.USER_PATH+"/image/view/")
+                .path(user.getId()+"/")
+                .path(fileModel.getId()+"")
+                .toUriString();
+
+        FileResponse fileResponse = new FileResponse();
+        fileResponse.setName(fileModel.getName());
+        fileResponse.setType(fileModel.getType());
+        fileResponse.setSize(fileModel.getData().length);
+        fileResponse.setData(fileModel.getData());
+        fileResponse.setUrl(url);
+        return fileResponse;
+    }
+
+    @Override
+    public byte[] getProfileImage(String fileName) throws FileNotFoundException {
+        FileModel fileModel = fileStoreService.getFileByName(fileName);
+        return fileModel.getData();
     }
 
 }

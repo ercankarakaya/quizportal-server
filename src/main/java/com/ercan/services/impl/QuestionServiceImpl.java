@@ -30,8 +30,14 @@ public class QuestionServiceImpl implements QuestionService {
 
     @Override
     public QuestionDto save(QuestionDto questionDto) {
+        // save question
         Question question = modelMapper.map(questionDto, Question.class);
-        return modelMapper.map(questionRepository.save(question), QuestionDto.class);
+        Question questionSaved = questionRepository.save(question);
+        // update quiz number of questions
+        Quiz quiz = quizRepository.getById(questionSaved.getQuiz().getId());
+        quiz.setNumberOfQuestions(String.valueOf((Integer.parseInt(quiz.getNumberOfQuestions())+1)));
+        quizRepository.save(quiz);
+        return modelMapper.map(questionSaved, QuestionDto.class);
     }
 
     @Override
