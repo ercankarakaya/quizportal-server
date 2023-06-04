@@ -32,9 +32,21 @@ public class QuizController {
         return ResponseEntity.ok(quizService.getQuizById(quizId));
     }
 
+    @GetMapping
+    public ResponseEntity<?> getQuizByTitle(@RequestParam("title") String title){
+        return ResponseEntity.ok(quizService.getQuizByTitle(title));
+    }
+
     @GetMapping(Mappings.ALL)
     public ResponseEntity<?> getAllQuizzes() {
         return ResponseEntity.ok(quizService.getAllQuizzes());
+    }
+
+    @GetMapping(Mappings.BY_CATEGORY_ID)
+    public ResponseEntity<?> getQuizByCategoryId(@PathVariable Long categoryId,
+                                                 @RequestParam String title,
+                                                 @RequestParam Integer recordStatus){
+      return ResponseEntity.ok(quizService.getQuizByCategoryId(categoryId,title,recordStatus));
     }
 
     @DeleteMapping(Mappings.BY_ID)

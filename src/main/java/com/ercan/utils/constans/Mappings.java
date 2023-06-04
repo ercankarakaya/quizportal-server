@@ -14,7 +14,7 @@ public class Mappings {
     public static final String SIGNIN = "/signin";
     public static final String SIGNUP = "/signup";
     public static final String CATEGORY_PATH = BASE_PATH + "/category";
-    public static final String BY_CATEGORY_ID="/category/{categoryId}";
+    public static final String BY_CATEGORY_ID="/by-category/{categoryId}";
     public static final String QUIZ_PATH = BASE_PATH + "/quiz";
     public static final String BY_QUIZ_ID = "/by-quiz/{quizId}";
     public static final String QUESTION_PATH = BASE_PATH + "/question";

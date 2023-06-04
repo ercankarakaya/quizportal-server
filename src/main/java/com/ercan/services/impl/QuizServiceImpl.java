@@ -1,9 +1,13 @@
 package com.ercan.services.impl;
 
+import com.ercan.dtos.CategoryDto;
 import com.ercan.dtos.QuizDto;
 import com.ercan.exceptions.QuizNotFoundException;
+import com.ercan.models.Category;
 import com.ercan.models.Quiz;
+import com.ercan.repositories.CategoryRepository;
 import com.ercan.repositories.QuizRepository;
+import com.ercan.services.CategoryService;
 import com.ercan.services.QuizService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +22,8 @@ public class QuizServiceImpl implements QuizService {
 
     @Autowired
     private QuizRepository quizRepository;
+    @Autowired
+    private CategoryRepository categoryRepository;
     @Autowired
     private ModelMapper modelMapper;
 
@@ -47,6 +53,26 @@ public class QuizServiceImpl implements QuizService {
         Quiz quiz = quizRepository.findById(quizId)
                 .orElseThrow(() -> new QuizNotFoundException());
         return modelMapper.map(quiz, QuizDto.class);
+    }
+
+    @Override
+    public QuizDto getQuizByTitle(String title) {
+        Quiz quiz = quizRepository.findByTitle(title).orElseThrow(()->new QuizNotFoundException());
+        return modelMapper.map(quiz,QuizDto.class);
+    }
+
+    @Override
+    public QuizDto getQuizByCategoryId(Long categoryId) {
+        Quiz quiz = quizRepository.findByCategoryId(categoryId).orElseThrow(()->new QuizNotFoundException());
+        return modelMapper.map(quiz,QuizDto.class);
+    }
+
+    @Override
+    public QuizDto getQuizByCategoryId(Long categoryId, String title, Integer recordStatus) {
+        Category category = categoryRepository.getById(categoryId);
+        Quiz quiz = quizRepository.findByCategoryAndTitleAndRecordStatus(category,title,recordStatus)
+                .orElseThrow(()->new QuizNotFoundException());
+        return modelMapper.map(quiz,QuizDto.class);
     }
 
     @Override
