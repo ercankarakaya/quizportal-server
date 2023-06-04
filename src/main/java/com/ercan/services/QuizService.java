@@ -4,6 +4,7 @@ import com.ercan.dtos.QuizDto;
 import com.ercan.models.Quiz;
 
 import java.util.List;
+import java.util.Set;
 
 public interface QuizService {
 
@@ -19,7 +20,7 @@ public interface QuizService {
 
     QuizDto getQuizByCategoryId(Long categoryId);
 
-    QuizDto getQuizByCategoryId(Long categoryId,String title,Integer recordStatus);
+    List<QuizDto> getQuizByCategoryId(Long categoryId, Set<String> title, Integer recordStatus);
 
     void deleteById(Long quizId);
 }

@@ -8,6 +8,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Set;
+
 
 @RestController
 @RequestMapping(Mappings.QUIZ_PATH)
@@ -44,7 +46,7 @@ public class QuizController {
 
     @GetMapping(Mappings.BY_CATEGORY_ID)
     public ResponseEntity<?> getQuizByCategoryId(@PathVariable Long categoryId,
-                                                 @RequestParam String title,
+                                                 @RequestParam Set<String> title,
                                                  @RequestParam Integer recordStatus){
       return ResponseEntity.ok(quizService.getQuizByCategoryId(categoryId,title,recordStatus));
     }
